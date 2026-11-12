@@ -148,5 +148,4 @@ commit-check: F1 ветка 'main' защищённая (git.protected_branches)
 
 ## Лицензия
 
-[MIT](LICENSE) — приложение, тесты, скрипты и документация. Копия agent-kit в `.claude/` пока под неё не
-подпадает: лицензия kit ещё не выбрана.
+[MIT](LICENSE) — всё в этом репозитории, включая копию agent-kit в `.claude/`.

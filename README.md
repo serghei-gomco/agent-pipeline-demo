@@ -150,5 +150,4 @@ the project profile is `.agent-kit.yml`. Issues found in the kit during this run
 
 ## License
 
-[MIT](LICENSE) — the app, tests, scripts and docs. The copy of agent-kit in `.claude/` is not covered yet: its
-license is still to be chosen.
+[MIT](LICENSE) — everything in this repository, including the copy of agent-kit in `.claude/`.
