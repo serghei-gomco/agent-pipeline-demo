@@ -89,6 +89,17 @@ describe('App', () => {
     expect(screen.getByLabelText('New task')).toHaveValue('');
   });
 
+  it('keeps the entered title and due date when creating fails (F-1)', async () => {
+    render(<App api={fakeApi([], true)} />);
+    await screen.findByText('No tasks yet.');
+    await userEvent.type(screen.getByLabelText('New task'), 'Pay rent');
+    fireEvent.change(screen.getByLabelText('Due date'), { target: { value: '2026-12-01' } });
+    await userEvent.click(screen.getByRole('button', { name: 'Add' }));
+    expect(await screen.findByRole('alert')).toHaveTextContent('title must not be empty');
+    expect(screen.getByLabelText('New task')).toHaveValue('Pay rent');
+    expect(screen.getByLabelText('Due date')).toHaveValue('2026-12-01');
+  });
+
   it('creates a task without a due date: no error, no date shown (AC-10)', async () => {
     render(<App api={fakeApi()} />);
     await screen.findByText('No tasks yet.');

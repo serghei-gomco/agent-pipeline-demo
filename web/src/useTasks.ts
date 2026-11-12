@@ -22,12 +22,15 @@ export function useTasks(api: Api) {
   }, [api]);
 
   // Every action clears the old error first and reports a new one if the call fails.
-  const run = useCallback(async (action: () => Promise<void>) => {
+  // Resolves to true on success, so callers can keep user input when the call failed.
+  const run = useCallback(async (action: () => Promise<void>): Promise<boolean> => {
     setError(null);
     try {
       await action();
+      return true;
     } catch (e) {
       setError((e as Error).message);
+      return false;
     }
   }, []);
 

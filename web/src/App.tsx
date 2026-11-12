@@ -16,7 +16,7 @@ export function App({ api = realApi, now = () => new Date() }: { api?: Api; now?
   const onSubmit = async (e: FormEvent) => {
     e.preventDefault();
     if (!title.trim()) return;
-    await add({ title, dueDate: dueDate || null });
+    if (!(await add({ title, dueDate: dueDate || null }))) return; // failed: keep both fields for a retry
     setTitle('');
     setDueDate('');
   };
