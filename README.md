@@ -7,6 +7,20 @@ checks caught, with log excerpts, and what it cost.
 
 Русская версия — [README.ru.md](README.ru.md).
 
+## Want this in your repository?
+
+I set up the same pipeline in your codebase, so agents work by your rules and every claim they make is checked.
+
+1. **Audit.** Your stack, tests, CI and branch rules; where agents currently go wrong in your team.
+2. **Setup.** agent-kit tuned to your stack: build and test commands, risky areas, test variations, protected
+   branches, forbidden paths. The git guard is tested against your rules, each "blocked" case with an "allowed" twin.
+3. **Pilot.** One real task from your backlog goes through the whole pipeline and leaves a paper trail like
+   [`docs/pipeline-run/`](docs/pipeline-run/).
+4. **Handover.** A walkthrough session, a short runbook, and the list of issues found in your setup.
+
+Everything stays in your repository; nothing runs on my servers. It works with Claude Code on your own subscription
+or API key. A typical engagement takes 1–2 weeks. Contact: serghei.gomco@gmail.com.
+
 ## The app
 
 - `server/` — Express API, one resource: `GET/POST /api/tasks`, `PATCH/DELETE /api/tasks/:id`. In-memory store,
@@ -52,9 +66,11 @@ date is before **the user's today, in their time zone**.* Traps planted in the s
 **1. The colleague's test, at intake** (`TASK_CARD.md`):
 
 ```
-R-20 | «тест на фильтр я уже написал … и зелёный» | OUT | attachments/overdue.test.ts:5-8 replaces the module
-under test via vi.mock('./overdue', …) (isOverdue: () => true) — green for ANY implementation
+R-20 | "I already wrote the filter test … and it's green" | OUT | attachments/overdue.test.ts:5-8 replaces the
+module under test via vi.mock('./overdue', …) (isOverdue: () => true) — green for ANY implementation
 ```
+
+(The spec and the kit's messages are in Russian; excerpts are translated.)
 
 **2. Review pass 1 → NEEDS_CHANGES.** A failed create wiped the form; the leap-year century rule (1900/2100)
 had no test — `year % 4 === 0` would have stayed green.
@@ -102,13 +118,13 @@ hash-locked to the QA plan, that went to `PLAN_ERRATA.md` instead (see `KIT_FIND
 **6. The git guard — blocked me too.** Hooks run before every shell command an agent issues:
 
 ```
-commit-check: коммит не пропущен:
-  F4 '.env' в запрещённых путях (git.forbidden_paths: .env).
-kit git-guard: Плоский force-push (--force/-f, в т.ч. склеенный '-uf') запрещён. В СВОЮ задачную ветку —
-'--force-with-lease'; в base — никогда.
-kit git-guard: 'git add … && git commit' одной командой: сторож коммита работает до выполнения команды и видит
-ещё пустой индекс.
-commit-check: F1 ветка 'main' защищённая (git.protected_branches) — коммит только в ветке задачи.
+commit-check: commit rejected:
+  F4 '.env' is in forbidden paths (git.forbidden_paths: .env).
+kit git-guard: plain force-push (--force/-f, including a glued '-uf') is forbidden. To YOUR task branch —
+'--force-with-lease'; to base — never.
+kit git-guard: 'git add … && git commit' in one command: the commit guard runs before the command and sees
+a still-empty index.
+commit-check: F1 branch 'main' is protected (git.protected_branches) — commit only on the task branch.
 ```
 
 The last two hit the orchestrating session itself while installing the kit. `scripts/test-hooks.sh` checks 13
