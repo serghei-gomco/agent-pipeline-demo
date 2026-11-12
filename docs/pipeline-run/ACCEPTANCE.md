@@ -2,7 +2,7 @@
 
 ## Сборка
 
-- Ветка `feat/T-20261112-1-due-dates`, HEAD `e722fb1bfaed515207586dd2fad1f608f4de1094`; рабочее дерево без изменений кода
+- Ветка `feat/T-20261112-1-due-dates`, HEAD `7127f317b93b9f8dfa283d934418176b352fac99`; рабочее дерево без изменений кода
   (`git status` — только чужой неотслеживаемый `KIT_FINDINGS.md`).
 - Порты 3001 и 5173 до старта свободны (`lsof` пуст).
 - `bash scripts/node.sh npm run -s build` → код 0, `✓ built in 270ms` (`evidence/build.txt`); `install` не нужен (`node_modules` есть).
@@ -85,13 +85,13 @@ SKIPPED — 2 (QC-82 (а), QC-86), INCONCLUSIVE — 0.
 БРАУЗЕРЫ: chrome (Google Chrome 157, headless) — полный набор; firefox и webkit — SKIPPED, нет рабочего движка. Набор —
 `qa.browsers: [chrome]` плюс второй/третий движок по признакам `rules/pipeline.md` (поле `<input type="date">`, CSS), как в QA_PLAN.
 
-Вердикт первого прогона (HEAD e722fb1): FAIL — повтор ниже.
+Вердикт первого прогона (HEAD 7127f31): FAIL — повтор ниже.
 
 ## Повтор после исправлений
 
 ### Сборка
 
-- Ветка `feat/T-20261112-1-due-dates`, HEAD `8ee52835eca1aa685a91a100a0d7447bc22b7b6b` (11 коммитов после `e722fb1`);
+- Ветка `feat/T-20261112-1-due-dates`, HEAD `59dd52f874a941f8fb16758970228b9e893a36b5` (11 коммитов после `7127f31`);
   `git status` — только чужой неотслеживаемый `KIT_FINDINGS.md`.
 - Порты 3001 и 5173 до старта свободны (`lsof` пуст). `bash scripts/node.sh npm run -s build` → код 0 (`evidence/r1-build.txt`).
 - `bash scripts/node.sh npm run dev` в фоне, PID 33577 (`evidence/r1-server.pid`), лог `evidence/r1-server.log`; готовность —
@@ -151,14 +151,14 @@ SKIPPED 0, INCONCLUSIVE 0.
 БРАУЗЕРЫ: chrome (Google Chrome 157, headless) — все UI-кейсы повтора; firefox/webkit — не запускались (нет рабочего движка,
 см. QC-86 первого прогона). Набор — `qa.browsers: [chrome]`.
 
-Вердикт повтора 1 (HEAD 8ee5283): FAIL — повтор 2 ниже.
+Вердикт повтора 1 (HEAD 59dd52f): FAIL — повтор 2 ниже.
 
 ## Повтор 2
 
 ### Сборка
 
-- Ветка `feat/T-20261112-1-due-dates`, HEAD `7cbc36ab1f556d134560c9f388d01e080b8f485a` (фикс F-7 в `DueDateInput`, `web/src/App.tsx`;
-  после `8ee5283` изменены только `web/src/App.tsx` и `web/src/App.test.tsx`). `git status` — код не изменён, неотслеживаемые только
+- Ветка `feat/T-20261112-1-due-dates`, HEAD `59da2cc33d1045139838b02b85bb9c495d033776` (фикс F-7 в `DueDateInput`, `web/src/App.tsx`;
+  после `59dd52f` изменены только `web/src/App.tsx` и `web/src/App.test.tsx`). `git status` — код не изменён, неотслеживаемые только
   чужие `INTERVIEW_NOTES.md`, `KIT_FINDINGS.md`, `README.md`, `README.ru.md`.
 - `project.docs` = `README.md` — теперь файл есть (неотслеживаемый), прочитан целиком.
 - Порты 3001 и 5173 до старта свободны (`lsof` пуст). `bash scripts/node.sh npm run -s build` → код 0 (`evidence/r2-build.txt`).

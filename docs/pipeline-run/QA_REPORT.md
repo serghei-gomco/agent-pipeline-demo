@@ -1,6 +1,6 @@
 # QA_REPORT — T-20261112-1 due-dates-overdue (круг r1)
 
-Ветка `feat/T-20261112-1-due-dates`, HEAD `e722fb1`. База — `chore/agent-kit` (`3a035bb`); remote нет, поэтому
+Ветка `feat/T-20261112-1-due-dates`, HEAD `7127f31`. База — `chore/agent-kit` (`317f74c`); remote нет, поэтому
 дифф считан как `git diff chore/agent-kit...HEAD`, а не от `origin/main` из `.agent-kit.yml` (иначе в дифф попадают
 коммиты установки kit). Риск плана — `high`. Ревью — `APPROVED` (проход 2). `QA_PLAN_FOR` sha `83a58389ccc2` =
 sha256 текущего `PLAN.md` — совпадает.

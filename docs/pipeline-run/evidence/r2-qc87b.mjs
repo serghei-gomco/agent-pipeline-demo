@@ -1,4 +1,4 @@
-// r2 (HEAD 7cbc36a) copy of r1-qc87b.mjs. QC-87 follow-up: who stops the submit of a half-typed date (Chrome native validation vs app alert),
+// r2 (HEAD 59da2cc) copy of r1-qc87b.mjs. QC-87 follow-up: who stops the submit of a half-typed date (Chrome native validation vs app alert),
 // positive control for the "complete the date" path, and QC-69 unbroken-title diagnosis.
 import { createRequire } from 'module';
 import { writeFileSync } from 'fs';

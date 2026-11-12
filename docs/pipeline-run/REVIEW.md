@@ -3,10 +3,10 @@
 ## Объём
 
 - Режим: обычный (после `kit-implementer`). `CHANGES.md` прочитан как список утверждений, каждое сверено с диффом.
-- База: `chore/agent-kit` = `3a035bb` (это и есть merge-base с HEAD `9965d78`). Remote в проекте нет, `git fetch`
+- База: `chore/agent-kit` = `317f74c` (это и есть merge-base с HEAD `73d8f1b`). Remote в проекте нет, `git fetch`
   не выполнялся — работа с локальным ref. Дифф считан как `git diff chore/agent-kit...HEAD`, а не от `main`
-  (иначе в него попадают коммиты установки kit `da23d4d`, `3a035bb`).
-- 11 файлов, +465 −23; 4 коммита (`7bfd152`, `7a893e9`, `67fcb63`, `9965d78`). Рабочее дерево относительно HEAD
+  (иначе в него попадают коммиты установки kit `1647cad`, `317f74c`).
+- 11 файлов, +465 −23; 4 коммита (`9595204`, `66dcf93`, `67b316b`, `73d8f1b`). Рабочее дерево относительно HEAD
   чистое; неотслеживаемый `KIT_FINDINGS.md` в корне к задаче не относится и в дифф не входит.
 - `project.docs: [README.md]` — файла в корне нет, прочитать нечего. Правила проекта взяты из `CLAUDE.md`
   и `.agent-kit.yml`. Расхождение конфига с репозиторием записано в `FOLLOWUP_DRAFT.md` (не дефект диффа).
@@ -186,10 +186,10 @@ VERDICT: NEEDS_CHANGES
 
 ### Объём
 
-- Режим: обычный, повторный проход. База та же: `chore/agent-kit` = `3a035bb` (merge-base с HEAD `e722fb1`);
+- Режим: обычный, повторный проход. База та же: `chore/agent-kit` = `317f74c` (merge-base с HEAD `7127f31`);
   remote нет, `git fetch` не выполнялся.
-- Весь дифф задачи: 11 файлов, +489 −24, 6 коммитов. Дельта после прохода 1 (`9965d78..HEAD`) — 2 коммита,
-  4 файла: `0d9cd71` (`web/src/App.tsx`, `web/src/useTasks.ts`, `web/src/App.test.tsx`) и `e722fb1`
+- Весь дифф задачи: 11 файлов, +489 −24, 6 коммитов. Дельта после прохода 1 (`73d8f1b..HEAD`) — 2 коммита,
+  4 файла: `0c632b8` (`web/src/App.tsx`, `web/src/useTasks.ts`, `web/src/App.test.tsx`) и `7127f31`
   (`server/test/tasks.test.ts`). Рабочее дерево чистое, кроме прежнего неотслеживаемого `KIT_FINDINGS.md`.
 - Номера строк тестов из таблицы прохода 1 сдвинулись: в `web/src/App.test.tsx` после `:91` на +11,
   в `server/test/tasks.test.ts` после `:134` на +9. Сами тесты AC не менялись.
@@ -235,13 +235,13 @@ VERDICT: NEEDS_CHANGES
 - Сверх плана / границы: дельта трогает только файлы, названные в диспозициях F-1 и F-3; `package.json`,
   `vitest.workspace.ts`, `app.ts` и прочие «Границы» не тронуты. Изменений «заодно» нет.
 - Гигиена: grep добавленных строк на `console.`, `debugger`, `TODO|FIXME` — пусто; сообщения коммитов
-  `0d9cd71`, `e722fb1` соответствуют `git.commit_pattern`, AI-трейлеров нет, путей из `forbidden_paths` нет.
+  `0c632b8`, `7127f31` соответствуют `git.commit_pattern`, AI-трейлеров нет, путей из `forbidden_paths` нет.
 - Заметка без диспозиции: имя теста `App.test.tsx:92` содержит «(F-1)» — ссылку на находку ревью, которой в
   репозитории нет (`.tasks/` в коммиты не попадает). На поведение не влияет.
 
 ### Что проверено
 
-- `git diff 9965d78..HEAD` целиком (4 файла); `web/src/useTasks.ts`, начало `web/src/App.tsx` и
+- `git diff 73d8f1b..HEAD` целиком (4 файла); `web/src/useTasks.ts`, начало `web/src/App.tsx` и
   `web/src/App.test.tsx` прочитаны полностью; `git diff --stat` от merge-base.
 - `bash scripts/node.sh npm run check` → код 0: typecheck, eslint, 64 passed.
 - `TZ=America/New_York`, `TZ=Pacific/Kiritimati`, `TZ=UTC` + `npm test --silent` → по 64 passed (пояс машины — EET).
@@ -267,9 +267,9 @@ VERDICT: APPROVED
 ### Объём
 
 - Режим: обычный, повторный проход, последний по `pipeline.max_review_passes: 3`. База та же: `chore/agent-kit` =
-  `3a035bb` (merge-base с HEAD `8ee5283`); remote нет, `git fetch` не выполнялся. `git.base_branch: main` из
+  `317f74c` (merge-base с HEAD `59dd52f`); remote нет, `git fetch` не выполнялся. `git.base_branch: main` из
   конфига не использован — база задана вызывающим.
-- Весь дифф задачи: 14 файлов, +755 −33, 17 коммитов. Дельта после прохода 2 (`e722fb1..HEAD`): 11 коммитов,
+- Весь дифф задачи: 14 файлов, +755 −33, 17 коммитов. Дельта после прохода 2 (`7127f31..HEAD`): 11 коммитов,
   8 файлов, +288 −31 — `package.json`, `server/test/tasks.test.ts`, `web/src/App.tsx`, `web/src/App.test.tsx`,
   `web/src/api.test.ts` (новый), `web/src/overdue.test.ts`, `web/src/styles.css`, `web/src/styles.test.tsx` (новый).
 - Рабочее дерево по файлам задачи чистое. Неотслеживаемые `KIT_FINDINGS.md` и `INTERVIEW_NOTES.md` (второй появился
@@ -279,7 +279,7 @@ VERDICT: APPROVED
 ### Danger
 
 - **контракт API** — дельтой не задет: `server/src/*`, `web/src/api.ts`, `web/src/useTasks.ts` без изменений
-  (`git diff --stat e722fb1..HEAD`). Новый `api.test.ts` закрепляет метод, путь и тело POST/PATCH на заглушке `fetch`.
+  (`git diff --stat 7127f31..HEAD`). Новый `api.test.ts` закрепляет метод, путь и тело POST/PATCH на заглушке `fetch`.
 - **валидация входа на сервере** — код не менялся. В тестах фейк стал строже (отклоняет `dueDate: ''`, как сервер);
   `server/test/tasks.test.ts` — менялся только способ запуска сервера (`127.0.0.1`), утверждения те же, 37/37.
 - **секреты и ключи** — не задет: grep добавленных строк дельты на ключи/токены/пароли — пусто; путей из
@@ -291,17 +291,17 @@ VERDICT: APPROVED
 
 | коммит | основание | тест | мутация → результат |
 |---|---|---|---|
-| `a7d576f` `package.json` | TF-1 (принято, повышает F-5) | `overdue.test.ts:28-38` в двух поясах | `localDay` через `toISOString()` → 2 failed при `TZ=Europe/Chisinau`, 2 failed при `TZ=America/New_York`, 15 passed при `TZ=UTC` — т.е. без `test:tz` на машине в UTC гейт был бы зелёным |
-| `0db2913` | QA D-2 | `overdue.test.ts:40-58` | `pad` без `padStart` → 3 failed |
-| `365aa79` | TF-2 | `App.test.tsx:249-…`, `:330` | `const today = new Date()` → 4 failed |
-| `ea2086d` | TF-3 | `App.test.tsx:95`, `:118`; `api.test.ts` | `dueDate: dueDate` (уходит `''`) → 3 failed |
-| `b6a1f88` | TF-6 | `App.test.tsx:238` | `<time>` обратно в `<label>` → 1 failed (`not.toBeChecked`) |
-| `22a183b` | BUG-1 | `styles.test.tsx:52` | без `flex-wrap` → 1 failed; без `white-space: nowrap` → 1 failed |
-| `bd558f5` | BUG-2 | `styles.test.tsx:38` | без правила `aria-pressed` → 1 failed |
-| `db5b84b` | TF-4 (подтверждён приёмкой QC-83) | `App.test.tsx:166` | без проверки `badInput` в `onBlur` → 1 failed (`[[1,{dueDate:null}]]` вместо `[]`) |
-| `3a4efce` | TF-8 | `App.test.tsx:185` | `useEffect` возвращён → 1 failed — **но см. F-7** |
-| `a57b072` | TF-10 | — (правка самих тестов сервера) | не мутировал; 37/37 в каждом прогоне, утверждения тестов не менялись |
-| `8ee5283` | двойник TF-4 (решение главной сессии) | `App.test.tsx:121` | без проверки `badInput` в `onSubmit` → 1 failed — **но см. F-8** |
+| `ccf3ceb` `package.json` | TF-1 (принято, повышает F-5) | `overdue.test.ts:28-38` в двух поясах | `localDay` через `toISOString()` → 2 failed при `TZ=Europe/Chisinau`, 2 failed при `TZ=America/New_York`, 15 passed при `TZ=UTC` — т.е. без `test:tz` на машине в UTC гейт был бы зелёным |
+| `ecfcb30` | QA D-2 | `overdue.test.ts:40-58` | `pad` без `padStart` → 3 failed |
+| `f999ba4` | TF-2 | `App.test.tsx:249-…`, `:330` | `const today = new Date()` → 4 failed |
+| `62899cf` | TF-3 | `App.test.tsx:95`, `:118`; `api.test.ts` | `dueDate: dueDate` (уходит `''`) → 3 failed |
+| `3be578d` | TF-6 | `App.test.tsx:238` | `<time>` обратно в `<label>` → 1 failed (`not.toBeChecked`) |
+| `3f38ddf` | BUG-1 | `styles.test.tsx:52` | без `flex-wrap` → 1 failed; без `white-space: nowrap` → 1 failed |
+| `f8eef35` | BUG-2 | `styles.test.tsx:38` | без правила `aria-pressed` → 1 failed |
+| `715df46` | TF-4 (подтверждён приёмкой QC-83) | `App.test.tsx:166` | без проверки `badInput` в `onBlur` → 1 failed (`[[1,{dueDate:null}]]` вместо `[]`) |
+| `eda6b2a` | TF-8 | `App.test.tsx:185` | `useEffect` возвращён → 1 failed — **но см. F-7** |
+| `6c5ba24` | TF-10 | — (правка самих тестов сервера) | не мутировал; 37/37 в каждом прогоне, утверждения тестов не менялись |
+| `59dd52f` | двойник TF-4 (решение главной сессии) | `App.test.tsx:121` | без проверки `badInput` в `onSubmit` → 1 failed — **но см. F-8** |
 
 Правок «заодно» нет: каждый коммит привязан к строке таблицы «Ревью плана тестов», к BUG-1/BUG-2 или к двойнику TF-4.
 TF-5, TF-7, TF-9 (компромисс/шум) не трогались. Оговорка к BUG-1/BUG-2: тесты `styles.test.tsx` закрепляют наличие
@@ -315,7 +315,7 @@ TF-5, TF-7, TF-9 (компромисс/шум) не трогались. Огов
 | F-2 | DEFER | осталась, оформлена | `FOLLOWUP_DRAFT.md` п.1 (номера строк обновлены). Правка TF-4 добавила ещё один вид расхождения «поле ≠ строка» (недовведённая дата остаётся в поле) — тот же пункт |
 | F-3 | закрыта | закрыта | `tasks.test.ts` 37/37 |
 | F-4 | CLOSE-ACCEPTED | без изменений | — |
-| F-5 | DEFER | **закрыта** коммитом `a7d576f` | мутация UTC красная в обоих поясах `test:tz` (строка 1 таблицы выше). `FOLLOWUP_DRAFT.md` п.2 помечен закрытым |
+| F-5 | DEFER | **закрыта** коммитом `ccf3ceb` | мутация UTC красная в обоих поясах `test:tz` (строка 1 таблицы выше). `FOLLOWUP_DRAFT.md` п.2 помечен закрытым |
 | F-6 | CLOSE-ACCEPTED | без изменений | допущение A-5 |
 
 ### Покрытие AC (что изменилось)
@@ -374,7 +374,7 @@ TF-5, TF-7, TF-9 (компромисс/шум) не трогались. Огов
   кандидат на удаление) или наш алерт.
 
 ### F-9 Три заголовка коммитов длиннее 72 символов
-- где: `ea2086d` (82), `db5b84b` (74), `22a183b` (74).
+- где: `62899cf` (82), `715df46` (74), `3f38ddf` (74).
 - сценарий: правило `git-gates.md` «Заголовок ≤ 72 символов»; сторож их пропустил. На поведение кода не влияет.
 - что нарушено: правило проекта (гейты git).
 - диспозиция: CLOSE-ACCEPTED — исправление означает переписать историю ветки (rebase — отдельное «да» человека);
@@ -394,7 +394,7 @@ TF-5, TF-7, TF-9 (компромисс/шум) не трогались. Огов
 
 ### Что проверено
 
-- `git diff e722fb1..HEAD` целиком по всем 8 файлам; `web/src/App.tsx`, `web/src/useTasks.ts`, `web/src/overdue.ts`,
+- `git diff 7127f31..HEAD` целиком по всем 8 файлам; `web/src/App.tsx`, `web/src/useTasks.ts`, `web/src/overdue.ts`,
   `web/src/api.ts`, `web/src/styles.css`, `vitest.workspace.ts`, `package.json` прочитаны полностью.
 - `bash scripts/node.sh npm run check` в проекте → код 0: typecheck, eslint, 81 passed (Chisinau) + 81 passed (New_York).
 - 12 мутаций в копии вне репозитория (таблица «Основания правок»), все убиты; после — база копии 81/81.
@@ -424,8 +424,8 @@ VERDICT: NEEDS_CHANGES
 ### Объём
 
 - Режим: обычный, повторный проход сверх `pipeline.max_review_passes: 3` — разрешён человеком явно (со слов вызывающего).
-  База та же: `chore/agent-kit` = `3a035bb`; remote нет, `git fetch` не выполнялся.
-- Весь дифф задачи: 14 файлов, +806 −33, 18 коммитов. Дельта после прохода 3 (`8ee5283..HEAD`): 1 коммит `7cbc36a`,
+  База та же: `chore/agent-kit` = `317f74c`; remote нет, `git fetch` не выполнялся.
+- Весь дифф задачи: 14 файлов, +806 −33, 18 коммитов. Дельта после прохода 3 (`59dd52f..HEAD`): 1 коммит `59da2cc`,
   2 файла, +56 −5 — `web/src/App.tsx` (+21 −5), `web/src/App.test.tsx` (+35).
 - Рабочее дерево по файлам задачи чистое. Неотслеживаемые `README.md`, `README.ru.md`, `KIT_FINDINGS.md`,
   `INTERVIEW_NOTES.md` — не из диффа задачи. `README.md` (`project.docs`) появился после прохода 3: описание демо,
@@ -434,7 +434,7 @@ VERDICT: NEEDS_CHANGES
 ### Danger
 
 - **контракт API** — не задет: `server/src/*`, `web/src/api.ts`, `web/src/useTasks.ts` в дельте не менялись
-  (`git diff --name-only 8ee5283..HEAD`). Тело PATCH прежнее (`{ dueDate: draft || null }`, `App.tsx:123`).
+  (`git diff --name-only 59dd52f..HEAD`). Тело PATCH прежнее (`{ dueDate: draft || null }`, `App.tsx:123`).
 - **валидация входа на сервере** — не задет, серверного кода в дельте нет.
 - **секреты и ключи** — не задет: grep добавленных строк дельты — пусто; путей из `git.forbidden_paths` нет.
 
@@ -442,7 +442,7 @@ VERDICT: NEEDS_CHANGES
 
 | находка | было | стало | чем проверено |
 |---|---|---|---|
-| F-7 | FIX | **закрыта** коммитом `7cbc36a` | оба сценария прохода 3 — тесты `App.test.tsx:208` (сц. 1) и `:224` (сц. 2), зелёные на HEAD; мутации ниже |
+| F-7 | FIX | **закрыта** коммитом `59da2cc` | оба сценария прохода 3 — тесты `App.test.tsx:208` (сц. 1) и `:224` (сц. 2), зелёные на HEAD; мутации ниже |
 | F-1, F-3, F-5 | закрыты | закрыты | `npm run check` → 83 + 83 passed |
 | F-2 | DEFER | осталась, дополнена находкой F-11 | `FOLLOWUP_DRAFT.md` п.1 |
 | F-4, F-6, F-8, F-9 | CLOSE-ACCEPTED | без изменений | — |
@@ -499,7 +499,7 @@ VERDICT: NEEDS_CHANGES
   и поле `2027-01-15`, введённое `2027-02-20` из поля пропало, повторить уходом из поля нельзя.
 - что нарушено: AC-12 в части «при ошибке черновик не сбрасывается» — только в этой гонке. Неверных данных на сервере
   нет, ошибка показана, поле совпадает со строкой. Относительно состояния прохода 2 (безусловный эффект) не регресс;
-  относительно `8ee5283` (без эффекта) — да, это цена возврата синхронизации.
+  относительно `59dd52f` (без эффекта) — да, это цена возврата синхронизации.
 - диспозиция: DEFER
   - почему не сейчас: нужны два ухода из поля за время одного ответа (на локальном API — миллисекунды); исправление —
     счётчик своих запросов в пути — это тот же выбор поведения поля при ошибке, что отложен в F-2.
@@ -518,7 +518,7 @@ VERDICT: NEEDS_CHANGES
 
 ### Что проверено
 
-- `git diff 8ee5283..HEAD` целиком; `web/src/App.tsx` и `web/src/useTasks.ts` прочитаны полностью; `PLAN.md` S-3.
+- `git diff 59dd52f..HEAD` целиком; `web/src/App.tsx` и `web/src/useTasks.ts` прочитаны полностью; `PLAN.md` S-3.
 - `bash scripts/node.sh npm run -s check` в проекте → код 0: typecheck, eslint, 83 passed (Chisinau) + 83 passed (New_York).
 - 5 мутаций `DueDateInput` в копии вне репозитория (таблица выше); 3 пробных теста в копии (гонка F-11, путь AC-12 с
   повтором, ввод + внешняя смена даты). Копия удалена, в репозитории ничего не менялось.

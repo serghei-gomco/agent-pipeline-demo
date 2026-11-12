@@ -1,4 +1,4 @@
-// Acceptance r1, repeat 2 (HEAD 7cbc36a, F-7), Chrome via Playwright 1.66 channel=chrome. Writes evidence/r2-QC-n.txt|png.
+// Acceptance r1, repeat 2 (HEAD 59da2cc, F-7), Chrome via Playwright 1.66 channel=chrome. Writes evidence/r2-QC-n.txt|png.
 import { createRequire } from 'module';
 import { writeFileSync } from 'fs';
 const require = createRequire(import.meta.url);
