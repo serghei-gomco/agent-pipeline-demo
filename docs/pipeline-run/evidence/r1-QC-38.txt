@@ -1,0 +1,20 @@
+{
+  "id": "QC-38",
+  "fieldsAfterFirst": {
+    "title": "",
+    "due": ""
+  },
+  "posts": [
+    "{\"title\":\"WithDate\",\"dueDate\":\"2026-11-13\"}",
+    "{\"title\":\"NoDate\",\"dueDate\":null}"
+  ],
+  "resp": [
+    201,
+    201
+  ],
+  "afterF5": {
+    "withDate": "2026-11-13",
+    "noDateTime": 0
+  },
+  "status": "PASS"
+}

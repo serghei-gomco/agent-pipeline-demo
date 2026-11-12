@@ -1,0 +1,17 @@
+{
+  "id": "QC-59",
+  "A": {
+    "time": "2026-11-13",
+    "input": "2026-11-13"
+  },
+  "get": [
+    {
+      "id": 86,
+      "title": "Shared",
+      "done": true,
+      "createdAt": "2026-11-12T14:16:08.706Z",
+      "dueDate": "2026-11-13"
+    }
+  ],
+  "status": "PASS"
+}

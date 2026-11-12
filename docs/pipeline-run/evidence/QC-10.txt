@@ -1,0 +1,76 @@
+{
+  "id": "QC-10",
+  "timeShown": 0,
+  "emptyText": 1,
+  "headers": [
+    "Tasks (0 open)",
+    "Tasks (1 open)",
+    "Tasks (0 open)",
+    "Tasks (1 open)",
+    "Tasks (0 open)"
+  ],
+  "alert": 0,
+  "net": [
+    {
+      "m": "GET",
+      "url": "/api/tasks",
+      "body": null
+    },
+    {
+      "m": "GET",
+      "url": "/api/tasks",
+      "body": null
+    },
+    {
+      "resp": 200,
+      "m": "GET",
+      "url": "/api/tasks"
+    },
+    {
+      "resp": 200,
+      "m": "GET",
+      "url": "/api/tasks"
+    },
+    {
+      "m": "POST",
+      "url": "/api/tasks",
+      "body": "{\"title\":\"Plain\",\"dueDate\":null}"
+    },
+    {
+      "resp": 201,
+      "m": "POST",
+      "url": "/api/tasks"
+    },
+    {
+      "m": "PATCH",
+      "url": "/api/tasks/60",
+      "body": "{\"done\":true}"
+    },
+    {
+      "resp": 200,
+      "m": "PATCH",
+      "url": "/api/tasks/60"
+    },
+    {
+      "m": "PATCH",
+      "url": "/api/tasks/60",
+      "body": "{\"done\":false}"
+    },
+    {
+      "resp": 200,
+      "m": "PATCH",
+      "url": "/api/tasks/60"
+    },
+    {
+      "m": "DELETE",
+      "url": "/api/tasks/60",
+      "body": null
+    },
+    {
+      "resp": 204,
+      "m": "DELETE",
+      "url": "/api/tasks/60"
+    }
+  ],
+  "status": "PASS"
+}

@@ -1,0 +1,20 @@
+{
+  "id": "QC-47",
+  "curl": "204",
+  "alert": "task not found",
+  "time": "2026-12-01",
+  "h1": "Tasks (1 open)",
+  "net": [
+    {
+      "m": "PATCH",
+      "url": "/api/tasks/84",
+      "body": "{\"dueDate\":\"2027-02-02\"}"
+    },
+    {
+      "resp": 404,
+      "m": "PATCH",
+      "url": "/api/tasks/84"
+    }
+  ],
+  "status": "PASS"
+}

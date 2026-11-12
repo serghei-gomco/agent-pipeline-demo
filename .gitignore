@@ -12,3 +12,4 @@ dist/
 # agent-kit: папки задач — артефакты, не код
 /.tasks/
 /.agent-kit/
+/INTERVIEW_NOTES.md

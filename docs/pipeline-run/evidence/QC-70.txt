@@ -1,0 +1,9 @@
+{
+  "id": "QC-70",
+  "t1": "Thu Nov 12 2026 23:59:00 GMT+0200 (Eastern European Standard Time)",
+  "before": "rgb(29, 29, 31)",
+  "t2": "Fri Nov 13 2026 00:01:00 GMT+0200 (Eastern European Standard Time)",
+  "afterMidnightNoAction": "rgb(29, 29, 31)",
+  "afterAction": "rgb(198, 40, 40)",
+  "status": "PASS"
+}

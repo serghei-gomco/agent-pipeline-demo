@@ -1,0 +1,44 @@
+{
+  "id": "QC-68",
+  "a": 0,
+  "focusedSegmentNote": "Chrome uses OS locale ru: дд.мм.гггг; click at left edge = day segment",
+  "valueTyped": "2027-01-20",
+  "b": [
+    "{\"dueDate\":\"2027-01-20\"}"
+  ],
+  "c": 0,
+  "time": "2027-01-20",
+  "status": "PASS",
+  "net": [
+    {
+      "m": "GET",
+      "url": "/api/tasks",
+      "body": null
+    },
+    {
+      "m": "GET",
+      "url": "/api/tasks",
+      "body": null
+    },
+    {
+      "resp": 200,
+      "m": "GET",
+      "url": "/api/tasks"
+    },
+    {
+      "resp": 200,
+      "m": "GET",
+      "url": "/api/tasks"
+    },
+    {
+      "m": "PATCH",
+      "url": "/api/tasks/73",
+      "body": "{\"dueDate\":\"2027-01-20\"}"
+    },
+    {
+      "resp": 200,
+      "m": "PATCH",
+      "url": "/api/tasks/73"
+    }
+  ]
+}

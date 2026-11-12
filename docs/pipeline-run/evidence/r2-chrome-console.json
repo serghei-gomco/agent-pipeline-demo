@@ -1,0 +1,230 @@
+[
+  {
+    "tag": "control",
+    "type": "debug",
+    "text": "[vite] connecting...",
+    "url": "http://localhost:5173/@vite/client"
+  },
+  {
+    "tag": "control",
+    "type": "debug",
+    "text": "[vite] connected.",
+    "url": "http://localhost:5173/@vite/client"
+  },
+  {
+    "tag": "control",
+    "type": "info",
+    "text": "%cDownload the React DevTools for a better development experience: https://reactjs.org/link/react-devtools font-weight:bold",
+    "url": "http://localhost:5173/@fs./node_modules/.vite/deps/chunk-373CG7ZK.js?v=8cf045ba"
+  },
+  {
+    "tag": "control",
+    "type": "error",
+    "text": "qa-probe",
+    "url": ""
+  },
+  {
+    "tag": "control",
+    "type": "error",
+    "text": "Failed to load resource: the server responded with a status of 404 (Not Found)",
+    "url": "http://localhost:5173/favicon.ico"
+  },
+  {
+    "tag": "QC-84",
+    "type": "debug",
+    "text": "[vite] connecting...",
+    "url": "http://localhost:5173/@vite/client"
+  },
+  {
+    "tag": "QC-84",
+    "type": "debug",
+    "text": "[vite] connected.",
+    "url": "http://localhost:5173/@vite/client"
+  },
+  {
+    "tag": "QC-84",
+    "type": "info",
+    "text": "%cDownload the React DevTools for a better development experience: https://reactjs.org/link/react-devtools font-weight:bold",
+    "url": "http://localhost:5173/@fs./node_modules/.vite/deps/chunk-373CG7ZK.js?v=8cf045ba"
+  },
+  {
+    "tag": "QC-83",
+    "type": "debug",
+    "text": "[vite] connecting...",
+    "url": "http://localhost:5173/@vite/client"
+  },
+  {
+    "tag": "QC-83",
+    "type": "debug",
+    "text": "[vite] connected.",
+    "url": "http://localhost:5173/@vite/client"
+  },
+  {
+    "tag": "QC-83",
+    "type": "info",
+    "text": "%cDownload the React DevTools for a better development experience: https://reactjs.org/link/react-devtools font-weight:bold",
+    "url": "http://localhost:5173/@fs./node_modules/.vite/deps/chunk-373CG7ZK.js?v=8cf045ba"
+  },
+  {
+    "tag": "QC-83",
+    "type": "debug",
+    "text": "[vite] connecting...",
+    "url": "http://localhost:5173/@vite/client"
+  },
+  {
+    "tag": "QC-83",
+    "type": "info",
+    "text": "%cDownload the React DevTools for a better development experience: https://reactjs.org/link/react-devtools font-weight:bold",
+    "url": "http://localhost:5173/@fs./node_modules/.vite/deps/chunk-373CG7ZK.js?v=8cf045ba"
+  },
+  {
+    "tag": "QC-83",
+    "type": "debug",
+    "text": "[vite] connected.",
+    "url": "http://localhost:5173/@vite/client"
+  },
+  {
+    "tag": "QC-87",
+    "type": "debug",
+    "text": "[vite] connecting...",
+    "url": "http://localhost:5173/@vite/client"
+  },
+  {
+    "tag": "QC-87",
+    "type": "debug",
+    "text": "[vite] connected.",
+    "url": "http://localhost:5173/@vite/client"
+  },
+  {
+    "tag": "QC-87",
+    "type": "info",
+    "text": "%cDownload the React DevTools for a better development experience: https://reactjs.org/link/react-devtools font-weight:bold",
+    "url": "http://localhost:5173/@fs./node_modules/.vite/deps/chunk-373CG7ZK.js?v=8cf045ba"
+  },
+  {
+    "tag": "QC-71",
+    "type": "debug",
+    "text": "[vite] connecting...",
+    "url": "http://localhost:5173/@vite/client"
+  },
+  {
+    "tag": "QC-71",
+    "type": "debug",
+    "text": "[vite] connected.",
+    "url": "http://localhost:5173/@vite/client"
+  },
+  {
+    "tag": "QC-71",
+    "type": "info",
+    "text": "%cDownload the React DevTools for a better development experience: https://reactjs.org/link/react-devtools font-weight:bold",
+    "url": "http://localhost:5173/@fs./node_modules/.vite/deps/chunk-373CG7ZK.js?v=8cf045ba"
+  },
+  {
+    "tag": "QC-37",
+    "type": "debug",
+    "text": "[vite] connecting...",
+    "url": "http://localhost:5173/@vite/client"
+  },
+  {
+    "tag": "QC-37",
+    "type": "debug",
+    "text": "[vite] connected.",
+    "url": "http://localhost:5173/@vite/client"
+  },
+  {
+    "tag": "QC-37",
+    "type": "info",
+    "text": "%cDownload the React DevTools for a better development experience: https://reactjs.org/link/react-devtools font-weight:bold",
+    "url": "http://localhost:5173/@fs./node_modules/.vite/deps/chunk-373CG7ZK.js?v=8cf045ba"
+  },
+  {
+    "tag": "QC-37",
+    "type": "debug",
+    "text": "[vite] connecting...",
+    "url": "http://localhost:5173/@vite/client"
+  },
+  {
+    "tag": "QC-37",
+    "type": "info",
+    "text": "%cDownload the React DevTools for a better development experience: https://reactjs.org/link/react-devtools font-weight:bold",
+    "url": "http://localhost:5173/@fs./node_modules/.vite/deps/chunk-373CG7ZK.js?v=8cf045ba"
+  },
+  {
+    "tag": "QC-37",
+    "type": "debug",
+    "text": "[vite] connected.",
+    "url": "http://localhost:5173/@vite/client"
+  },
+  {
+    "tag": "QC-37",
+    "type": "debug",
+    "text": "[vite] connecting...",
+    "url": "http://localhost:5173/@vite/client"
+  },
+  {
+    "tag": "QC-37",
+    "type": "debug",
+    "text": "[vite] connected.",
+    "url": "http://localhost:5173/@vite/client"
+  },
+  {
+    "tag": "QC-37",
+    "type": "info",
+    "text": "%cDownload the React DevTools for a better development experience: https://reactjs.org/link/react-devtools font-weight:bold",
+    "url": "http://localhost:5173/@fs./node_modules/.vite/deps/chunk-373CG7ZK.js?v=8cf045ba"
+  },
+  {
+    "tag": "QC-88-A",
+    "type": "debug",
+    "text": "[vite] connecting...",
+    "url": "http://localhost:5173/@vite/client"
+  },
+  {
+    "tag": "QC-88-A",
+    "type": "debug",
+    "text": "[vite] connected.",
+    "url": "http://localhost:5173/@vite/client"
+  },
+  {
+    "tag": "QC-88-A",
+    "type": "info",
+    "text": "%cDownload the React DevTools for a better development experience: https://reactjs.org/link/react-devtools font-weight:bold",
+    "url": "http://localhost:5173/@fs./node_modules/.vite/deps/chunk-373CG7ZK.js?v=8cf045ba"
+  },
+  {
+    "tag": "QC-88-B",
+    "type": "debug",
+    "text": "[vite] connecting...",
+    "url": "http://localhost:5173/@vite/client"
+  },
+  {
+    "tag": "QC-88-B",
+    "type": "debug",
+    "text": "[vite] connected.",
+    "url": "http://localhost:5173/@vite/client"
+  },
+  {
+    "tag": "QC-88-B",
+    "type": "info",
+    "text": "%cDownload the React DevTools for a better development experience: https://reactjs.org/link/react-devtools font-weight:bold",
+    "url": "http://localhost:5173/@fs./node_modules/.vite/deps/chunk-373CG7ZK.js?v=8cf045ba"
+  },
+  {
+    "tag": "QC-88-A",
+    "type": "debug",
+    "text": "[vite] connecting...",
+    "url": "http://localhost:5173/@vite/client"
+  },
+  {
+    "tag": "QC-88-A",
+    "type": "debug",
+    "text": "[vite] connected.",
+    "url": "http://localhost:5173/@vite/client"
+  },
+  {
+    "tag": "QC-88-A",
+    "type": "info",
+    "text": "%cDownload the React DevTools for a better development experience: https://reactjs.org/link/react-devtools font-weight:bold",
+    "url": "http://localhost:5173/@fs./node_modules/.vite/deps/chunk-373CG7ZK.js?v=8cf045ba"
+  }
+]

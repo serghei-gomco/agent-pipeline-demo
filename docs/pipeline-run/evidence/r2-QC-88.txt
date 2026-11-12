@@ -1,0 +1,171 @@
+{
+  "id": "QC-88",
+  "patchesB": [
+    "{\"dueDate\":\"2027-02-02\"}"
+  ],
+  "apiAfterB": {
+    "id": 20,
+    "title": "Two tabs",
+    "done": false,
+    "createdAt": "2026-11-12T14:58:31.548Z",
+    "dueDate": "2027-02-02"
+  },
+  "aStale": {
+    "time": "2026-12-01",
+    "field": "2026-12-01",
+    "checked": false
+  },
+  "focusTrailStale": [
+    "Due date for Two tabs",
+    "Due date for Two tabs",
+    "Due date for Two tabs",
+    "Due date for Two tabs",
+    "Delete Two tabs"
+  ],
+  "patchesA_afterStaleTab": [],
+  "aAfterTick": {
+    "time": "2027-02-02",
+    "field": "2027-02-02",
+    "checked": true
+  },
+  "focusTrail": [
+    "Due date for Two tabs",
+    "Due date for Two tabs",
+    "Due date for Two tabs",
+    "Due date for Two tabs",
+    "Delete Two tabs"
+  ],
+  "patchesA_afterTabOnly": [
+    "{\"done\":true}"
+  ],
+  "patchesA": [
+    {
+      "url": "/api/tasks/20",
+      "body": "{\"done\":true}"
+    }
+  ],
+  "apiAfterTab": {
+    "id": 20,
+    "title": "Two tabs",
+    "done": true,
+    "createdAt": "2026-11-12T14:58:31.548Z",
+    "dueDate": "2027-02-02"
+  },
+  "aAfterTab": {
+    "time": "2027-02-02",
+    "field": "2027-02-02",
+    "checked": true
+  },
+  "focusTrailControl": [
+    "Due date for Two tabs",
+    "Due date for Two tabs",
+    "Due date for Two tabs",
+    "Delete Two tabs"
+  ],
+  "patchesA_control": [
+    "{\"done\":true}",
+    "{\"dueDate\":\"2027-03-03\"}"
+  ],
+  "apiAfterControl": "2027-03-03",
+  "aAfterF5": {
+    "time": "2027-03-03",
+    "field": "2027-03-03",
+    "checked": true
+  },
+  "positiveControl": true,
+  "netA": [
+    {
+      "m": "GET",
+      "url": "/api/tasks",
+      "body": null
+    },
+    {
+      "m": "GET",
+      "url": "/api/tasks",
+      "body": null
+    },
+    {
+      "resp": 200,
+      "m": "GET",
+      "url": "/api/tasks"
+    },
+    {
+      "resp": 200,
+      "m": "GET",
+      "url": "/api/tasks"
+    },
+    {
+      "m": "PATCH",
+      "url": "/api/tasks/20",
+      "body": "{\"done\":true}"
+    },
+    {
+      "resp": 200,
+      "m": "PATCH",
+      "url": "/api/tasks/20"
+    },
+    {
+      "m": "PATCH",
+      "url": "/api/tasks/20",
+      "body": "{\"dueDate\":\"2027-03-03\"}"
+    },
+    {
+      "resp": 200,
+      "m": "PATCH",
+      "url": "/api/tasks/20"
+    },
+    {
+      "m": "GET",
+      "url": "/api/tasks",
+      "body": null
+    },
+    {
+      "m": "GET",
+      "url": "/api/tasks",
+      "body": null
+    },
+    {
+      "resp": 200,
+      "m": "GET",
+      "url": "/api/tasks"
+    },
+    {
+      "resp": 200,
+      "m": "GET",
+      "url": "/api/tasks"
+    }
+  ],
+  "netB": [
+    {
+      "m": "GET",
+      "url": "/api/tasks",
+      "body": null
+    },
+    {
+      "m": "GET",
+      "url": "/api/tasks",
+      "body": null
+    },
+    {
+      "resp": 200,
+      "m": "GET",
+      "url": "/api/tasks"
+    },
+    {
+      "resp": 200,
+      "m": "GET",
+      "url": "/api/tasks"
+    },
+    {
+      "m": "PATCH",
+      "url": "/api/tasks/20",
+      "body": "{\"dueDate\":\"2027-02-02\"}"
+    },
+    {
+      "resp": 200,
+      "m": "PATCH",
+      "url": "/api/tasks/20"
+    }
+  ],
+  "status": "PASS"
+}

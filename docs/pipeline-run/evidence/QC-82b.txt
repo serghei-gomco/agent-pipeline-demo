@@ -1,0 +1,7 @@
+{
+  "id": "QC-82b",
+  "draft": "2027-12-01",
+  "afterF5": "2026-12-01",
+  "patches": 0,
+  "status": "PASS"
+}

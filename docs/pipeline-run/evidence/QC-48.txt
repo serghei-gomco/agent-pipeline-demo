@@ -1,0 +1,56 @@
+{
+  "id": "QC-48",
+  "duringAbort": {
+    "alert": "Failed to fetch",
+    "time": "2026-12-01",
+    "input": "2027-01-15"
+  },
+  "afterRetry": {
+    "alertCount": 0,
+    "time": "2027-01-15",
+    "input": "2027-01-15"
+  },
+  "net": [
+    {
+      "m": "GET",
+      "url": "/api/tasks",
+      "body": null
+    },
+    {
+      "m": "GET",
+      "url": "/api/tasks",
+      "body": null
+    },
+    {
+      "resp": 200,
+      "m": "GET",
+      "url": "/api/tasks"
+    },
+    {
+      "resp": 200,
+      "m": "GET",
+      "url": "/api/tasks"
+    },
+    {
+      "m": "PATCH",
+      "url": "/api/tasks/85",
+      "body": "{\"dueDate\":\"2027-01-15\"}"
+    },
+    {
+      "failed": "net::ERR_FAILED",
+      "m": "PATCH",
+      "url": "/api/tasks/85"
+    },
+    {
+      "m": "PATCH",
+      "url": "/api/tasks/85",
+      "body": "{\"dueDate\":\"2027-01-15\"}"
+    },
+    {
+      "resp": 200,
+      "m": "PATCH",
+      "url": "/api/tasks/85"
+    }
+  ],
+  "status": "PASS"
+}

@@ -1,0 +1,10 @@
+{
+  "id": "QC-83",
+  "valueAfterBackspace": "",
+  "patches": [
+    "{\"dueDate\":null}"
+  ],
+  "timeCount": 0,
+  "status": "PASS",
+  "note": "наблюдение: неполная дата = срок убран"
+}

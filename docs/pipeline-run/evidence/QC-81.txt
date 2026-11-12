@@ -1,0 +1,58 @@
+# QC-81: curl 4xx probes against live API; server.log lines before:       18
+$ curl -X POST http://localhost:3001/api/tasks -H content-type: application/json -d {"title":"ok","dueDate":"2026-12-01"}
+{"id":92,"title":"ok","done":false,"createdAt":"2026-11-12T14:20:30.255Z","dueDate":"2026-12-01"}  -> HTTP 201
+$ curl -X POST http://localhost:3001/api/tasks -H content-type: application/json -d {"title":"x","dueDate":"12.11.2026"}
+{"errors":["dueDate must be a date in YYYY-MM-DD format"]}  -> HTTP 400
+$ curl -X POST http://localhost:3001/api/tasks -H content-type: application/json -d {"title":"x","dueDate":"2026-1-5"}
+{"errors":["dueDate must be a date in YYYY-MM-DD format"]}  -> HTTP 400
+$ curl -X POST http://localhost:3001/api/tasks -H content-type: application/json -d {"title":"x","dueDate":"2026/11/12"}
+{"errors":["dueDate must be a date in YYYY-MM-DD format"]}  -> HTTP 400
+$ curl -X POST http://localhost:3001/api/tasks -H content-type: application/json -d {"title":"x","dueDate":"2026-11-12T10:00:00.000Z"}
+{"errors":["dueDate must be a date in YYYY-MM-DD format"]}  -> HTTP 400
+$ curl -X POST http://localhost:3001/api/tasks -H content-type: application/json -d {"title":"x","dueDate":"завтра"}
+{"errors":["dueDate must be a date in YYYY-MM-DD format"]}  -> HTTP 400
+$ curl -X POST http://localhost:3001/api/tasks -H content-type: application/json -d {"title":"x","dueDate":""}
+{"errors":["dueDate must be a date in YYYY-MM-DD format"]}  -> HTTP 400
+$ curl -X POST http://localhost:3001/api/tasks -H content-type: application/json -d {"title":"x","dueDate":20261112}
+{"errors":["dueDate must be a date in YYYY-MM-DD format"]}  -> HTTP 400
+$ curl -X POST http://localhost:3001/api/tasks -H content-type: application/json -d {"title":"x","dueDate":true}
+{"errors":["dueDate must be a date in YYYY-MM-DD format"]}  -> HTTP 400
+$ curl -X POST http://localhost:3001/api/tasks -H content-type: application/json -d {"title":"x","dueDate":{}}
+{"errors":["dueDate must be a date in YYYY-MM-DD format"]}  -> HTTP 400
+$ curl -X POST http://localhost:3001/api/tasks -H content-type: application/json -d {"title":"x","dueDate":"2026-02-30"}
+{"errors":["dueDate must be a real calendar date (YYYY-MM-DD)"]}  -> HTTP 400
+$ curl -X POST http://localhost:3001/api/tasks -H content-type: application/json -d {"title":"x","dueDate":"2026-02-29"}
+{"errors":["dueDate must be a real calendar date (YYYY-MM-DD)"]}  -> HTTP 400
+$ curl -X POST http://localhost:3001/api/tasks -H content-type: application/json -d {"title":"x","dueDate":"2026-04-31"}
+{"errors":["dueDate must be a real calendar date (YYYY-MM-DD)"]}  -> HTTP 400
+$ curl -X POST http://localhost:3001/api/tasks -H content-type: application/json -d {"title":"x","dueDate":"2026-13-01"}
+{"errors":["dueDate must be a real calendar date (YYYY-MM-DD)"]}  -> HTTP 400
+$ curl -X POST http://localhost:3001/api/tasks -H content-type: application/json -d {"title":"x","dueDate":"2026-00-10"}
+{"errors":["dueDate must be a real calendar date (YYYY-MM-DD)"]}  -> HTTP 400
+$ curl -X POST http://localhost:3001/api/tasks -H content-type: application/json -d {"title":"x","dueDate":"2026-11-00"}
+{"errors":["dueDate must be a real calendar date (YYYY-MM-DD)"]}  -> HTTP 400
+$ curl -X POST http://localhost:3001/api/tasks -H content-type: application/json -d {"title":"x","dueDate":"20261-01-01"}
+{"errors":["dueDate must be a date in YYYY-MM-DD format"]}  -> HTTP 400
+$ curl -X POST http://localhost:3001/api/tasks -H content-type: application/json -d {"title":"","dueDate":"2026-02-30"}
+{"errors":["title must not be empty","dueDate must be a real calendar date (YYYY-MM-DD)"]}  -> HTTP 400
+$ curl -X POST http://localhost:3001/api/tasks -H content-type: application/json -d {"title":"leap","dueDate":"2028-02-29"}
+{"id":93,"title":"leap","done":false,"createdAt":"2026-11-12T14:20:30.367Z","dueDate":"2028-02-29"}  -> HTTP 201
+$ curl -X PATCH http://localhost:3001/api/tasks/92 -H content-type: application/json -d {"dueDate":"2026-02-30"}
+{"errors":["dueDate must be a real calendar date (YYYY-MM-DD)"]}  -> HTTP 400
+$ curl -X PATCH http://localhost:3001/api/tasks/92 -H content-type: application/json -d {"dueDate":"12.11.2026"}
+{"errors":["dueDate must be a date in YYYY-MM-DD format"]}  -> HTTP 400
+$ curl -X PATCH http://localhost:3001/api/tasks/92 -H content-type: application/json -d {"dueDate":null}
+{"id":92,"title":"ok","done":false,"createdAt":"2026-11-12T14:20:30.255Z","dueDate":null}  -> HTTP 200
+$ curl -X PATCH http://localhost:3001/api/tasks/999999 -H content-type: application/json -d {"dueDate":"2026-12-01"}
+{"errors":["task not found"]}  -> HTTP 404
+$ curl -X PATCH http://localhost:3001/api/tasks/abc -H content-type: application/json -d {"dueDate":"2026-12-01"}
+{"errors":["id must be a positive integer"]}  -> HTTP 400
+$ curl -X POST http://localhost:3001/api/tasks -H content-type: application/json -d {bad json
+{"errors":["invalid JSON"]}  -> HTTP 400
+$ curl http://localhost:3001/api/tasks
+[{"id":92,"title":"ok","done":false,"createdAt":"2026-11-12T14:20:30.255Z","dueDate":null},{"id":93,"title":"leap","done":false,"createdAt":"2026-11-12T14:20:30.367Z","dueDate":"2028-02-29"}]  -> HTTP 200
+# server.log since probes:
+# grep 500|Error|at  in whole server.log:
+(no matches)
+# positive control: log is the live process (API listening line present):
+18:[api] API listening on http://localhost:3001

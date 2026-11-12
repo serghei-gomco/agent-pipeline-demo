@@ -1,0 +1,35 @@
+{
+  "id": "QC-75-live",
+  "initial": [
+    "true",
+    "false",
+    2
+  ],
+  "tabPath": [
+    "new-due",
+    "new-due",
+    "new-due",
+    "new-due",
+    "Add",
+    "Все",
+    "Просроченные"
+  ],
+  "afterEnter": [
+    "false",
+    "true",
+    1
+  ],
+  "afterSpaceOnAll": [
+    "true",
+    "false",
+    2
+  ],
+  "afterSpaceOnOverdue": [
+    "false",
+    "true",
+    1
+  ],
+  "posts": 0,
+  "titleDraft": "draft",
+  "status": "PASS"
+}

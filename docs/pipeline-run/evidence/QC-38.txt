@@ -1,0 +1,35 @@
+{
+  "id": "QC-38",
+  "fieldsAfterAdd": {
+    "title": "",
+    "due": ""
+  },
+  "posts": [
+    {
+      "m": "POST",
+      "url": "/api/tasks",
+      "body": "{\"title\":\"WithDate\",\"dueDate\":\"2026-11-13\"}"
+    },
+    {
+      "resp": 201,
+      "m": "POST",
+      "url": "/api/tasks"
+    },
+    {
+      "m": "POST",
+      "url": "/api/tasks",
+      "body": "{\"title\":\"NoDate\",\"dueDate\":null}"
+    },
+    {
+      "resp": 201,
+      "m": "POST",
+      "url": "/api/tasks"
+    }
+  ],
+  "afterF5": {
+    "WithDate": "2026-11-13",
+    "NoDateTime": 0,
+    "rows": 2
+  },
+  "status": "PASS"
+}
