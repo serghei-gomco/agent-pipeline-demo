@@ -1,13 +1,24 @@
+import { once } from 'node:events';
+import type { Server } from 'node:http';
 import request from 'supertest';
-import { beforeEach, describe, expect, it } from 'vitest';
+import { afterEach, beforeEach, describe, expect, it } from 'vitest';
 import { createApp } from '../src/app.js';
 import { TaskStore } from '../src/store.js';
 
 const fixedNow = () => new Date('2026-11-12T10:00:00.000Z');
-let app: ReturnType<typeof createApp>;
+let app: Server;
 
-beforeEach(() => {
-  app = createApp(new TaskStore(fixedNow));
+// Listen on 127.0.0.1 ourselves. Given a bare app, supertest calls listen(0) on all interfaces (::) but sends the
+// request to 127.0.0.1:<port>; when another local process already holds 127.0.0.1 on that port, the request goes
+// to it and the test sees a foreign 404/501 (flaky TF-10). A port chosen for 127.0.0.1 itself cannot collide.
+beforeEach(async () => {
+  app = createApp(new TaskStore(fixedNow)).listen(0, '127.0.0.1');
+  await once(app, 'listening');
+});
+
+afterEach(async () => {
+  app.close();
+  await once(app, 'close');
 });
 
 describe('tasks API', () => {
