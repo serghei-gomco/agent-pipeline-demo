@@ -2,6 +2,7 @@
   "name": "agent-pipeline-demo",
   "version": "0.1.0",
   "private": true,
+  "license": "MIT",
   "type": "module",
   "description": "Tiny task list (Node/TS API + React/TS UI) used to demo an AI-agent pipeline with checks.",
   "engines": {
