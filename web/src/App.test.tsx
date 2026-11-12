@@ -205,6 +205,41 @@ describe('App', () => {
     ]);
   });
 
+  it('shows a due date changed elsewhere and does not send the old one back on blur (F-7)', async () => {
+    const api = fakeApi([task(1, 'A', false, '2026-12-01')]);
+    const save = api.update;
+    // Another tab moved the date meanwhile: the answer to our "done" PATCH carries the new date.
+    api.update = async (id, patch) => ({ ...(await save(id, patch)), dueDate: '2027-05-05' });
+    render(<App api={api} />);
+    await screen.findByText('A');
+    await userEvent.click(within(rowOf('A')).getByRole('checkbox'));
+    expect(await within(rowOf('A')).findByText('2027-05-05')).toBeInTheDocument();
+    const input = screen.getByLabelText('Due date for A');
+    expect(input).toHaveValue('2027-05-05');
+    fireEvent.focus(input); // Tab through the field without typing
+    fireEvent.blur(input);
+    expect(api.calls.update).toEqual([[1, { done: true }]]);
+  });
+
+  it('shows the saved date after typing it back while the save was in flight (F-7)', async () => {
+    const api = fakeApi([task(1, 'A', false, '2026-12-01')]);
+    const save = api.update;
+    const pending: (() => void)[] = [];
+    api.update = (id, patch) => new Promise((resolve) => pending.push(() => resolve(save(id, patch))));
+    render(<App api={api} />);
+    await screen.findByText('A');
+    const input = screen.getByLabelText('Due date for A');
+    fireEvent.change(input, { target: { value: '2027-01-15' } });
+    fireEvent.blur(input); // save sent, waits for the server
+    fireEvent.change(input, { target: { value: '2026-12-01' } }); // changed their mind
+    fireEvent.blur(input); // equals the row's date: nothing is sent
+    expect(pending).toHaveLength(1);
+    pending[0]();
+    expect(await within(rowOf('A')).findByText('2027-01-15')).toBeInTheDocument();
+    expect(input).toHaveValue('2027-01-15');
+    expect(api.calls.update).toEqual([[1, { dueDate: '2027-01-15' }]]);
+  });
+
   it('does not save on blur when the date did not change (AC-11)', async () => {
     const api = fakeApi([task(1, 'A', false, '2026-12-01')]);
     render(<App api={api} />);

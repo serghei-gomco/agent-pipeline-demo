@@ -1,4 +1,4 @@
-import { useState, type FocusEvent, type FormEvent } from 'react';
+import { useEffect, useRef, useState, type FocusEvent, type FormEvent } from 'react';
 import { api as realApi, type Api } from './api';
 import { filterOverdue, isOverdue } from './overdue';
 import { useTasks } from './useTasks';
@@ -96,8 +96,9 @@ export function App({ api = realApi, now = () => new Date() }: { api?: Api; now?
 // Due date of an existing task. Saved when the field loses focus, not on every change:
 // while typing a year Chrome fires a change per digit (0002, 0020, ...), which would send junk dates.
 // After a failed save the draft stays in the field and the row keeps showing the old date.
-// The draft is never overwritten from `value`: the field is the only place that changes this date, and a save
-// answered while the user is typing again must not wipe the new input (TF-8).
+// The draft follows `value` (any update answer replaces the task, and the date may have been changed elsewhere),
+// but only while the field holds no unsaved input: a save answered while the user is typing again must not wipe
+// the new input (TF-8), and a field left stale would send the old date back on the next blur (F-7).
 function DueDateInput({
   value,
   label,
@@ -108,15 +109,30 @@ function DueDateInput({
   onSave: (next: string | null) => void;
 }) {
   const [draft, setDraft] = useState(value ?? '');
+  const edited = useRef(false); // set by typing, cleared on blur: true while the field holds unsaved input
+
+  useEffect(() => {
+    if (!edited.current) setDraft(value ?? '');
+  }, [value]);
 
   const onBlur = (e: FocusEvent<HTMLInputElement>) => {
     // A half-typed date (e.g. Backspace in the year) reads as '' in Chrome, but it is not a request to clear: keep the date.
-    if (e.currentTarget.validity.badInput) return;
+    if (e.currentTarget.validity.badInput) return; // still unsaved input: keep `edited`
+    edited.current = false;
     if (draft === (value ?? '')) return;
     onSave(draft || null); // an empty field means "no due date": send null, never ""
   };
 
   return (
-    <input type="date" aria-label={label} value={draft} onChange={(e) => setDraft(e.target.value)} onBlur={onBlur} />
+    <input
+      type="date"
+      aria-label={label}
+      value={draft}
+      onChange={(e) => {
+        edited.current = true;
+        setDraft(e.target.value);
+      }}
+      onBlur={onBlur}
+    />
   );
 }
