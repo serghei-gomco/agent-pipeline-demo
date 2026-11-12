@@ -1,20 +1,23 @@
 import { fireEvent, render, screen, waitFor, within } from '@testing-library/react';
 import userEvent from '@testing-library/user-event';
 import { describe, expect, it } from 'vitest';
-import type { Task, TaskPatch } from '../../server/src/types';
+import type { NewTaskInput, Task, TaskPatch } from '../../server/src/types';
 import type { Api } from './api';
 import { App } from './App';
 
 // A fake API with the same shape as the real one: keeps tests fast and independent of the server.
-// `calls.update` records every PATCH body so tests can check what would go over the wire.
+// `calls.create` / `calls.update` record every POST / PATCH body so tests can check what would go over the wire.
+// Like the server, it rejects an empty-string dueDate: only "YYYY-MM-DD" or null are valid (TF-3).
 function fakeApi(initial: Task[] = [], failCreate = false, failUpdate = false) {
   let tasks = [...initial];
   let nextId = tasks.length + 1;
-  const calls = { update: [] as [number, TaskPatch][] };
+  const calls = { create: [] as NewTaskInput[], update: [] as [number, TaskPatch][] };
   const api: Api = {
     list: async () => tasks,
     create: async (input) => {
+      calls.create.push(input);
       if (failCreate) throw new Error('title must not be empty');
+      if (input.dueDate === '') throw new Error('dueDate must be a date in YYYY-MM-DD format');
       const t: Task = {
         id: nextId++,
         title: input.title.trim(),
@@ -27,6 +30,7 @@ function fakeApi(initial: Task[] = [], failCreate = false, failUpdate = false) {
     },
     update: async (id, patch) => {
       calls.update.push([id, patch]);
+      if (patch.dueDate === '') throw new Error('dueDate must be a date in YYYY-MM-DD format');
       if (failUpdate) throw new Error('dueDate must be a real calendar date (YYYY-MM-DD)');
       tasks = tasks.map((t) => (t.id === id ? { ...t, ...patch } : t));
       return tasks.find((t) => t.id === id)!;
@@ -78,7 +82,8 @@ describe('App', () => {
   });
 
   it('creates a task with a due date and clears the field (AC-10)', async () => {
-    render(<App api={fakeApi()} />);
+    const api = fakeApi();
+    render(<App api={api} />);
     await screen.findByText('No tasks yet.');
     await userEvent.type(screen.getByLabelText('New task'), 'Pay rent');
     fireEvent.change(screen.getByLabelText('Due date'), { target: { value: '2026-12-01' } });
@@ -87,6 +92,7 @@ describe('App', () => {
     expect(rowOf('Pay rent')).toHaveTextContent('2026-12-01');
     expect(screen.getByLabelText('Due date')).toHaveValue('');
     expect(screen.getByLabelText('New task')).toHaveValue('');
+    expect(api.calls.create).toEqual([{ title: 'Pay rent', dueDate: '2026-12-01' }]);
   });
 
   it('keeps the entered title and due date when creating fails (F-1)', async () => {
@@ -100,14 +106,16 @@ describe('App', () => {
     expect(screen.getByLabelText('Due date')).toHaveValue('2026-12-01');
   });
 
-  it('creates a task without a due date: no error, no date shown (AC-10)', async () => {
-    render(<App api={fakeApi()} />);
+  it('creates a task without a due date: sends null, no error, no date shown (AC-10, TF-3)', async () => {
+    const api = fakeApi();
+    render(<App api={api} />);
     await screen.findByText('No tasks yet.');
     await userEvent.type(screen.getByLabelText('New task'), 'No deadline');
     await userEvent.click(screen.getByRole('button', { name: 'Add' }));
     await screen.findByText('No deadline');
     expect(screen.queryByRole('alert')).not.toBeInTheDocument();
     expect(rowOf('No deadline').querySelector('time')).toBeNull();
+    expect(api.calls.create).toEqual([{ title: 'No deadline', dueDate: null }]);
   });
 
   it('changes a due date on blur and sends the new date (AC-11)', async () => {
