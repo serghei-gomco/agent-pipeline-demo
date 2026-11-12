@@ -13,7 +13,7 @@ function fakeApi(initial: Task[] = [], failCreate = false): Api {
     list: async () => tasks,
     create: async (title) => {
       if (failCreate) throw new Error('title must not be empty');
-      const t: Task = { id: nextId++, title: title.trim(), done: false, createdAt: '2026-11-12T10:00:00.000Z' };
+      const t: Task = { id: nextId++, title: title.trim(), done: false, createdAt: '2026-11-12T10:00:00.000Z', dueDate: null };
       tasks = [...tasks, t];
       return t;
     },
@@ -28,7 +28,7 @@ function fakeApi(initial: Task[] = [], failCreate = false): Api {
 }
 
 const task = (id: number, title: string, done = false): Task => ({
-  id, title, done, createdAt: '2026-11-12T10:00:00.000Z',
+  id, title, done, createdAt: '2026-11-12T10:00:00.000Z', dueDate: null,
 });
 
 describe('App', () => {

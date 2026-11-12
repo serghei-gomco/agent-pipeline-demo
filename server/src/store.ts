@@ -22,6 +22,7 @@ export class TaskStore {
       title: input.title,
       done: false,
       createdAt: this.now().toISOString(),
+      dueDate: input.dueDate ?? null,
     };
     this.tasks.set(task.id, task);
     return task;
