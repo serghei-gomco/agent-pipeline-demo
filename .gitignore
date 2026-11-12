@@ -8,3 +8,7 @@ dist/
 # private working notes (not part of the public example)
 /TASK.md
 /STATE.md
+
+# agent-kit: папки задач — артефакты, не код
+/.tasks/
+/.agent-kit/
