@@ -1,5 +1,5 @@
 import { useCallback, useEffect, useState } from 'react';
-import type { Task, TaskPatch } from '../../server/src/types';
+import type { NewTaskInput, Task, TaskPatch } from '../../server/src/types';
 import type { Api } from './api';
 
 // All task state lives in this hook. Components get data + actions and never call fetch themselves.
@@ -31,9 +31,9 @@ export function useTasks(api: Api) {
     }
   }, []);
 
-  const add = (title: string) =>
+  const add = (input: NewTaskInput) =>
     run(async () => {
-      const task = await api.create(title);
+      const task = await api.create(input);
       setTasks((prev) => [...prev, task]);
     });
 
