@@ -56,15 +56,18 @@ export function App({ api = realApi, now = () => new Date() }: { api?: Api; now?
         <ul>
           {visible.map((t) => (
             <li key={t.id} className={isOverdue(t, today) ? 'overdue' : undefined}>
-              <label>
-                <input type="checkbox" checked={t.done} onChange={() => update(t.id, { done: !t.done })} />
-                <span className={t.done ? 'title done' : 'title'}>{t.title}</span>
+              {/* The date sits outside the checkbox label: a click on it must not toggle "done". */}
+              <span className="item">
+                <label>
+                  <input type="checkbox" checked={t.done} onChange={() => update(t.id, { done: !t.done })} />
+                  <span className={t.done ? 'title done' : 'title'}>{t.title}</span>
+                </label>
                 {t.dueDate && (
                   <time className="due" dateTime={t.dueDate}>
                     {t.dueDate}
                   </time>
                 )}
-              </label>
+              </span>
               <DueDateInput
                 value={t.dueDate}
                 label={`Due date for ${t.title}`}

@@ -171,6 +171,17 @@ describe('App', () => {
     expect(rowOf('Without date')).not.toHaveTextContent('2026-12-01');
   });
 
+  it('does not toggle done when the due date is clicked (TF-6)', async () => {
+    const api = fakeApi([task(1, 'A', false, '2026-12-01')]);
+    render(<App api={api} />);
+    await screen.findByText('A');
+    await userEvent.click(within(rowOf('A')).getByText('2026-12-01'));
+    expect(within(rowOf('A')).getByRole('checkbox')).not.toBeChecked();
+    expect(api.calls.update).toEqual([]);
+    await userEvent.click(screen.getByText('A'));
+    await waitFor(() => expect(within(rowOf('A')).getByRole('checkbox')).toBeChecked());
+  });
+
   describe('overdue (today = 2031-03-05 15:00 local, far from the real clock)', () => {
     // Pinned years away from the real date: an App that ignored `now` and read the clock would fail here (TF-2).
     const now = () => new Date(2031, 2, 5, 15, 0);
