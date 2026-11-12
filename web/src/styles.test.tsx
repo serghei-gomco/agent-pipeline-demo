@@ -1,4 +1,5 @@
 import { render, screen } from '@testing-library/react';
+import userEvent from '@testing-library/user-event';
 import { readFileSync } from 'node:fs';
 import { resolve } from 'node:path';
 import { afterEach, beforeEach, describe, expect, it } from 'vitest';
@@ -28,7 +29,26 @@ const api: Api = {
   remove: async () => undefined,
 };
 
+const look = (el: Element) => {
+  const s = getComputedStyle(el);
+  return { background: s.backgroundColor, color: s.color, fontWeight: s.fontWeight, border: s.borderColor };
+};
+
 describe('styles', () => {
+  it('shows the active filter mode differently from the inactive one (BUG-2)', async () => {
+    render(<App api={api} />);
+    await screen.findByText('A');
+    const all = screen.getByRole('button', { name: 'Все' });
+    const overdue = screen.getByRole('button', { name: 'Просроченные' });
+    expect(look(all)).not.toEqual(look(overdue));
+    const active = look(all);
+    const inactive = look(overdue);
+
+    await userEvent.click(overdue);
+    expect(look(overdue)).toEqual(active);
+    expect(look(all)).toEqual(inactive);
+  });
+
   it('lets the create form wrap and keeps the due date on one line (BUG-1)', async () => {
     render(<App api={api} />);
     await screen.findByText('A');
