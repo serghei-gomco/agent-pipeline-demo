@@ -163,12 +163,13 @@ describe('App', () => {
     expect(rowOf('Without date')).not.toHaveTextContent('2026-12-01');
   });
 
-  describe('overdue (today = 2026-11-12 15:00 local)', () => {
-    const now = () => new Date(2026, 10, 12, 15, 0);
+  describe('overdue (today = 2031-03-05 15:00 local, far from the real clock)', () => {
+    // Pinned years away from the real date: an App that ignored `now` and read the clock would fail here (TF-2).
+    const now = () => new Date(2031, 2, 5, 15, 0);
     const four = () => [
-      task(1, 'Yesterday', false, '2026-11-11'),
-      task(2, 'Today', false, '2026-11-12'),
-      task(3, 'Tomorrow', false, '2026-11-13'),
+      task(1, 'Yesterday', false, '2031-03-04'),
+      task(2, 'Today', false, '2031-03-05'),
+      task(3, 'Tomorrow', false, '2031-03-06'),
       task(4, 'No date'),
     ];
     const showOverdue = () => userEvent.click(screen.getByRole('button', { name: 'Просроченные' }));
@@ -210,7 +211,7 @@ describe('App', () => {
     });
 
     it('says "Нет просроченных задач" when nothing is overdue, "No tasks yet." only in "Все" (AC-17)', async () => {
-      const { unmount } = render(<App api={fakeApi([task(1, 'Tomorrow', false, '2026-11-13')])} now={now} />);
+      const { unmount } = render(<App api={fakeApi([task(1, 'Tomorrow', false, '2031-03-06')])} now={now} />);
       await screen.findByText('Tomorrow');
       await showOverdue();
       expect(screen.getByText('Нет просроченных задач')).toBeInTheDocument();
@@ -228,7 +229,7 @@ describe('App', () => {
     });
 
     it('never treats done tasks as overdue, also after toggling (AC-20)', async () => {
-      render(<App api={fakeApi([task(1, 'Old done', true, '2020-01-01'), task(2, 'Late', false, '2026-11-11')])} now={now} />);
+      render(<App api={fakeApi([task(1, 'Old done', true, '2020-01-01'), task(2, 'Late', false, '2031-03-04')])} now={now} />);
       await screen.findByText('Old done');
       expect(rowOf('Old done')).not.toHaveClass('overdue');
 
@@ -243,8 +244,20 @@ describe('App', () => {
       await waitFor(() => expect(rowOf('Late')).toHaveClass('overdue'));
     });
 
+    it('takes "today" from the injected clock, also when it is in the past (TF-2)', async () => {
+      // By the real clock 2025-06-01 is long gone; by the injected 2020-01-05 it is still ahead.
+      const past = () => new Date(2020, 0, 5, 15, 0);
+      render(<App api={fakeApi([task(1, 'Future then', false, '2025-06-01'), task(2, 'Late then', false, '2020-01-04')])} now={past} />);
+      await screen.findByText('Future then');
+      expect(rowOf('Future then')).not.toHaveClass('overdue');
+      expect(rowOf('Late then')).toHaveClass('overdue');
+      await showOverdue();
+      expect(screen.getAllByRole('listitem')).toHaveLength(1);
+      expect(screen.getByText('Late then')).toBeInTheDocument();
+    });
+
     it('keeps the "N open" counter the same in both modes (AC-21)', async () => {
-      render(<App api={fakeApi([...four(), task(5, 'Done', true, '2026-11-01')])} now={now} />);
+      render(<App api={fakeApi([...four(), task(5, 'Done', true, '2031-03-01')])} now={now} />);
       await screen.findByText('Yesterday');
       expect(screen.getByRole('heading')).toHaveTextContent('Tasks (4 open)');
       await showOverdue();
