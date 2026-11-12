@@ -1,11 +1,17 @@
 import { useEffect, useState, type FormEvent } from 'react';
 import { api as realApi, type Api } from './api';
+import { filterOverdue, isOverdue } from './overdue';
 import { useTasks } from './useTasks';
 
-export function App({ api = realApi }: { api?: Api }) {
+type Filter = 'all' | 'overdue';
+
+// `now` is injected like `api`, so tests pin "today"; the real app reads the clock on every render.
+export function App({ api = realApi, now = () => new Date() }: { api?: Api; now?: () => Date }) {
   const { tasks, loading, error, add, update, remove } = useTasks(api);
   const [title, setTitle] = useState('');
   const [dueDate, setDueDate] = useState('');
+  const [filter, setFilter] = useState<Filter>('all');
+  const today = now();
 
   const onSubmit = async (e: FormEvent) => {
     e.preventDefault();
@@ -15,7 +21,8 @@ export function App({ api = realApi }: { api?: Api }) {
     setDueDate('');
   };
 
-  const open = tasks.filter((t) => !t.done).length;
+  const open = tasks.filter((t) => !t.done).length; // whole list, not the filtered view
+  const visible = filter === 'overdue' ? filterOverdue(tasks, today) : tasks;
 
   return (
     <main className="app">
@@ -29,18 +36,29 @@ export function App({ api = realApi }: { api?: Api }) {
         <button type="submit">Add</button>
       </form>
 
+      <div role="group" aria-label="Filter" className="filter">
+        <button type="button" aria-pressed={filter === 'all'} onClick={() => setFilter('all')}>
+          Все
+        </button>
+        <button type="button" aria-pressed={filter === 'overdue'} onClick={() => setFilter('overdue')}>
+          Просроченные
+        </button>
+      </div>
+
       {error && <p role="alert">{error}</p>}
       {loading ? (
         <p>Loading…</p>
-      ) : tasks.length === 0 ? (
+      ) : filter === 'all' && tasks.length === 0 ? (
         <p>No tasks yet.</p>
+      ) : filter === 'overdue' && visible.length === 0 ? (
+        <p>Нет просроченных задач</p>
       ) : (
         <ul>
-          {tasks.map((t) => (
-            <li key={t.id}>
+          {visible.map((t) => (
+            <li key={t.id} className={isOverdue(t, today) ? 'overdue' : undefined}>
               <label>
                 <input type="checkbox" checked={t.done} onChange={() => update(t.id, { done: !t.done })} />
-                <span className={t.done ? 'done' : undefined}>{t.title}</span>
+                <span className={t.done ? 'title done' : 'title'}>{t.title}</span>
                 {t.dueDate && (
                   <time className="due" dateTime={t.dueDate}>
                     {t.dueDate}

@@ -151,4 +151,93 @@ describe('App', () => {
     expect(rowOf('Without date').querySelector('time')).toBeNull();
     expect(rowOf('Without date')).not.toHaveTextContent('2026-12-01');
   });
+
+  describe('overdue (today = 2026-11-12 15:00 local)', () => {
+    const now = () => new Date(2026, 10, 12, 15, 0);
+    const four = () => [
+      task(1, 'Yesterday', false, '2026-11-11'),
+      task(2, 'Today', false, '2026-11-12'),
+      task(3, 'Tomorrow', false, '2026-11-13'),
+      task(4, 'No date'),
+    ];
+    const showOverdue = () => userEvent.click(screen.getByRole('button', { name: 'Просроченные' }));
+    const showAll = () => userEvent.click(screen.getByRole('button', { name: 'Все' }));
+
+    it('marks only open tasks due before today with the overdue class (AC-14)', async () => {
+      render(<App api={fakeApi(four())} now={now} />);
+      await screen.findByText('Yesterday');
+      expect(rowOf('Yesterday')).toHaveClass('overdue');
+      expect(rowOf('Today')).not.toHaveClass('overdue');
+      expect(rowOf('Tomorrow')).not.toHaveClass('overdue');
+      expect(rowOf('No date')).not.toHaveClass('overdue');
+    });
+
+    it('has an "Все / Просроченные" switch between the form and the list, "Все" on by default (AC-15)', async () => {
+      render(<App api={fakeApi(four())} now={now} />);
+      await screen.findByText('Yesterday');
+      const all = screen.getByRole('button', { name: 'Все' });
+      const overdue = screen.getByRole('button', { name: 'Просроченные' });
+      expect(all).toHaveAttribute('aria-pressed', 'true');
+      expect(overdue).toHaveAttribute('aria-pressed', 'false');
+      const form = screen.getByRole('button', { name: 'Add' }).closest('form')!;
+      const group = screen.getByRole('group', { name: 'Filter' });
+      const list = screen.getByRole('list');
+      expect(form.compareDocumentPosition(group) & Node.DOCUMENT_POSITION_FOLLOWING).toBeTruthy();
+      expect(group.compareDocumentPosition(list) & Node.DOCUMENT_POSITION_FOLLOWING).toBeTruthy();
+      expect(screen.getAllByRole('listitem')).toHaveLength(4);
+    });
+
+    it('shows only overdue tasks in "Просроченные" and all of them again in "Все" (AC-16)', async () => {
+      render(<App api={fakeApi(four())} now={now} />);
+      await screen.findByText('Yesterday');
+      await showOverdue();
+      expect(screen.getByRole('button', { name: 'Просроченные' })).toHaveAttribute('aria-pressed', 'true');
+      expect(screen.getAllByRole('listitem')).toHaveLength(1);
+      expect(screen.getByText('Yesterday')).toBeInTheDocument();
+      await showAll();
+      expect(screen.getAllByRole('listitem')).toHaveLength(4);
+    });
+
+    it('says "Нет просроченных задач" when nothing is overdue, "No tasks yet." only in "Все" (AC-17)', async () => {
+      const { unmount } = render(<App api={fakeApi([task(1, 'Tomorrow', false, '2026-11-13')])} now={now} />);
+      await screen.findByText('Tomorrow');
+      await showOverdue();
+      expect(screen.getByText('Нет просроченных задач')).toBeInTheDocument();
+      expect(screen.queryByRole('list')).not.toBeInTheDocument();
+      unmount();
+
+      render(<App api={fakeApi()} now={now} />);
+      await screen.findByText('No tasks yet.');
+      await showOverdue();
+      expect(screen.getByText('Нет просроченных задач')).toBeInTheDocument();
+      expect(screen.queryByText('No tasks yet.')).not.toBeInTheDocument();
+      await showAll();
+      expect(screen.getByText('No tasks yet.')).toBeInTheDocument();
+      expect(screen.queryByText('Нет просроченных задач')).not.toBeInTheDocument();
+    });
+
+    it('never treats done tasks as overdue, also after toggling (AC-20)', async () => {
+      render(<App api={fakeApi([task(1, 'Old done', true, '2020-01-01'), task(2, 'Late', false, '2026-11-11')])} now={now} />);
+      await screen.findByText('Old done');
+      expect(rowOf('Old done')).not.toHaveClass('overdue');
+
+      await showOverdue();
+      expect(screen.queryByText('Old done')).not.toBeInTheDocument();
+      expect(screen.getAllByRole('listitem')).toHaveLength(1);
+      await userEvent.click(within(rowOf('Late')).getByRole('checkbox'));
+      await waitFor(() => expect(screen.queryByText('Late')).not.toBeInTheDocument());
+
+      await showAll();
+      await userEvent.click(within(rowOf('Late')).getByRole('checkbox'));
+      await waitFor(() => expect(rowOf('Late')).toHaveClass('overdue'));
+    });
+
+    it('keeps the "N open" counter the same in both modes (AC-21)', async () => {
+      render(<App api={fakeApi([...four(), task(5, 'Done', true, '2026-11-01')])} now={now} />);
+      await screen.findByText('Yesterday');
+      expect(screen.getByRole('heading')).toHaveTextContent('Tasks (4 open)');
+      await showOverdue();
+      expect(screen.getByRole('heading')).toHaveTextContent('Tasks (4 open)');
+    });
+  });
 });
