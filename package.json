@@ -13,9 +13,10 @@
     "dev:web": "vite --config web/vite.config.ts",
     "build": "vite build --config web/vite.config.ts",
     "test": "vitest run",
+    "test:tz": "TZ=Europe/Chisinau vitest run && TZ=America/New_York vitest run",
     "lint": "eslint",
     "typecheck": "tsc -p server && tsc -p web",
-    "check": "npm run -s typecheck && npm run -s lint -- . && npm test --silent"
+    "check": "npm run -s typecheck && npm run -s lint -- . && npm run -s test:tz"
   },
   "dependencies": {
     "express": "4.21.1",
