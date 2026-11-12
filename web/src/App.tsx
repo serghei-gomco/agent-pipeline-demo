@@ -10,12 +10,20 @@ export function App({ api = realApi, now = () => new Date() }: { api?: Api; now?
   const { tasks, loading, error, add, update, remove } = useTasks(api);
   const [title, setTitle] = useState('');
   const [dueDate, setDueDate] = useState('');
+  const [dueError, setDueError] = useState<string | null>(null);
   const [filter, setFilter] = useState<Filter>('all');
   const today = now();
 
   const onSubmit = async (e: FormEvent) => {
     e.preventDefault();
     if (!title.trim()) return;
+    // A half-typed date reads as '' in Chrome; sending it would create the task without a due date (TF-4 twin).
+    const dueField = e.currentTarget.querySelector<HTMLInputElement>('#new-due');
+    if (dueField?.validity.badInput) {
+      setDueError('Enter a complete due date or clear the field.');
+      return; // keep both fields as typed
+    }
+    setDueError(null);
     if (!(await add({ title, dueDate: dueDate || null }))) return; // failed: keep both fields for a retry
     setTitle('');
     setDueDate('');
@@ -35,6 +43,7 @@ export function App({ api = realApi, now = () => new Date() }: { api?: Api; now?
         <input id="new-due" type="date" value={dueDate} onChange={(e) => setDueDate(e.target.value)} />
         <button type="submit">Add</button>
       </form>
+      {dueError && <p role="alert">{dueError}</p>}
 
       <div role="group" aria-label="Filter" className="filter">
         <button type="button" aria-pressed={filter === 'all'} onClick={() => setFilter('all')}>

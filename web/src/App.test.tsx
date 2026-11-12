@@ -118,6 +118,28 @@ describe('App', () => {
     expect(api.calls.create).toEqual([{ title: 'No deadline', dueDate: null }]);
   });
 
+  it('does not create a task while the due date is half-typed, shows an error and keeps the fields (TF-4 twin)', async () => {
+    const api = fakeApi();
+    render(<App api={api} />);
+    await screen.findByText('No tasks yet.');
+    await userEvent.type(screen.getByLabelText('New task'), 'Pay rent');
+    const due = screen.getByLabelText('Due date');
+    // Chrome with a half-typed date: value '' and validity.badInput; jsdom has no partial dates, so emulate it.
+    let badInput = true;
+    Object.defineProperty(due, 'validity', { configurable: true, get: () => ({ badInput }) });
+    await userEvent.click(screen.getByRole('button', { name: 'Add' }));
+    expect(await screen.findByRole('alert')).toHaveTextContent('Enter a complete due date or clear the field.');
+    expect(api.calls.create).toEqual([]);
+    expect(screen.getByText('No tasks yet.')).toBeInTheDocument();
+    expect(screen.getByLabelText('New task')).toHaveValue('Pay rent');
+
+    badInput = false; // the user cleared the date: an empty field still means "no due date"
+    await userEvent.click(screen.getByRole('button', { name: 'Add' }));
+    await screen.findByText('Pay rent');
+    expect(screen.queryByRole('alert')).not.toBeInTheDocument();
+    expect(api.calls.create).toEqual([{ title: 'Pay rent', dueDate: null }]);
+  });
+
   it('changes a due date on blur and sends the new date (AC-11)', async () => {
     const api = fakeApi([task(1, 'A', false, '2026-12-01')]);
     render(<App api={api} />);
