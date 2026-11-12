@@ -141,6 +141,25 @@ describe('App', () => {
     expect(api.calls.update).toEqual([[1, { dueDate: null }]]);
   });
 
+  it('does not clear the date when the field holds a half-typed date, clears it once the field is empty (TF-4)', async () => {
+    const api = fakeApi([task(1, 'A', false, '2026-12-01')]);
+    render(<App api={api} />);
+    await screen.findByText('A');
+    const input = screen.getByLabelText('Due date for A');
+    // Chrome after Backspace in the year: value '' and validity.badInput; jsdom has no partial dates, so emulate it.
+    let badInput = true;
+    Object.defineProperty(input, 'validity', { configurable: true, get: () => ({ badInput }) });
+    fireEvent.change(input, { target: { value: '' } });
+    fireEvent.blur(input);
+    expect(api.calls.update).toEqual([]);
+    expect(rowOf('A').querySelector('time')).toHaveTextContent('2026-12-01');
+
+    badInput = false; // the user cleared the rest: an empty field still means "no due date"
+    fireEvent.blur(input);
+    await waitFor(() => expect(rowOf('A').querySelector('time')).toBeNull());
+    expect(api.calls.update).toEqual([[1, { dueDate: null }]]);
+  });
+
   it('does not save on blur when the date did not change (AC-11)', async () => {
     const api = fakeApi([task(1, 'A', false, '2026-12-01')]);
     render(<App api={api} />);

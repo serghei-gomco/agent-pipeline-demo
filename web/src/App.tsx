@@ -1,4 +1,4 @@
-import { useEffect, useState, type FormEvent } from 'react';
+import { useEffect, useState, type FocusEvent, type FormEvent } from 'react';
 import { api as realApi, type Api } from './api';
 import { filterOverdue, isOverdue } from './overdue';
 import { useTasks } from './useTasks';
@@ -102,7 +102,9 @@ function DueDateInput({
     setDraft(value ?? '');
   }, [value]);
 
-  const onBlur = () => {
+  const onBlur = (e: FocusEvent<HTMLInputElement>) => {
+    // A half-typed date (e.g. Backspace in the year) reads as '' in Chrome, but it is not a request to clear: keep the date.
+    if (e.currentTarget.validity.badInput) return;
     if (draft === (value ?? '')) return;
     onSave(draft || null); // an empty field means "no due date": send null, never ""
   };
