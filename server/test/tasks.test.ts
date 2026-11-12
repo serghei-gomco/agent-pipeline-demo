@@ -131,7 +131,16 @@ describe('tasks API — due date', () => {
     expect((await request(app).get('/api/tasks')).body).toEqual([]);
   });
 
-  it.each([['2026-02-30'], ['2026-02-29'], ['2026-04-31'], ['2026-13-01'], ['2026-00-10'], ['2026-11-00']])(
+  it.each([
+    ['2026-02-30'],
+    ['2026-02-29'],
+    ['2026-04-31'],
+    ['2026-13-01'],
+    ['2026-00-10'],
+    ['2026-11-00'],
+    ['2100-02-29'],
+    ['1900-02-29'],
+  ])(
     'rejects a day that does not exist %s (AC-7)',
     async (dueDate) => {
       const res = await request(app).post('/api/tasks').send({ title: 'A', dueDate });
@@ -141,10 +150,10 @@ describe('tasks API — due date', () => {
     },
   );
 
-  it('accepts 29 February of a leap year (AC-7)', async () => {
-    const res = await request(app).post('/api/tasks').send({ title: 'A', dueDate: '2028-02-29' });
+  it.each([['2028-02-29'], ['2000-02-29']])('accepts 29 February of a leap year %s (AC-7)', async (dueDate) => {
+    const res = await request(app).post('/api/tasks').send({ title: 'A', dueDate });
     expect(res.status).toBe(201);
-    expect(res.body.dueDate).toBe('2028-02-29');
+    expect(res.body.dueDate).toBe(dueDate);
   });
 
   it('reports dueDate errors like other fields and collects them with title errors (AC-8)', async () => {
