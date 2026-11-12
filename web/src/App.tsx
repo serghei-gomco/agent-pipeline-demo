@@ -1,4 +1,4 @@
-import { useEffect, useState, type FocusEvent, type FormEvent } from 'react';
+import { useState, type FocusEvent, type FormEvent } from 'react';
 import { api as realApi, type Api } from './api';
 import { filterOverdue, isOverdue } from './overdue';
 import { useTasks } from './useTasks';
@@ -87,6 +87,8 @@ export function App({ api = realApi, now = () => new Date() }: { api?: Api; now?
 // Due date of an existing task. Saved when the field loses focus, not on every change:
 // while typing a year Chrome fires a change per digit (0002, 0020, ...), which would send junk dates.
 // After a failed save the draft stays in the field and the row keeps showing the old date.
+// The draft is never overwritten from `value`: the field is the only place that changes this date, and a save
+// answered while the user is typing again must not wipe the new input (TF-8).
 function DueDateInput({
   value,
   label,
@@ -97,10 +99,6 @@ function DueDateInput({
   onSave: (next: string | null) => void;
 }) {
   const [draft, setDraft] = useState(value ?? '');
-
-  useEffect(() => {
-    setDraft(value ?? '');
-  }, [value]);
 
   const onBlur = (e: FocusEvent<HTMLInputElement>) => {
     // A half-typed date (e.g. Backspace in the year) reads as '' in Chrome, but it is not a request to clear: keep the date.

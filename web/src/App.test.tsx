@@ -160,6 +160,29 @@ describe('App', () => {
     expect(api.calls.update).toEqual([[1, { dueDate: null }]]);
   });
 
+  it('keeps a date typed while the previous save is still in flight (TF-8)', async () => {
+    const api = fakeApi([task(1, 'A', false, '2026-12-01')]);
+    const save = api.update;
+    const pending: (() => void)[] = [];
+    api.update = (id, patch) => new Promise((resolve) => pending.push(() => resolve(save(id, patch))));
+    render(<App api={api} />);
+    await screen.findByText('A');
+    const input = screen.getByLabelText('Due date for A');
+    fireEvent.change(input, { target: { value: '2027-01-15' } });
+    fireEvent.blur(input); // first save is sent and waits for the server
+    fireEvent.change(input, { target: { value: '2027-02-20' } }); // the user goes on typing
+    pending[0]();
+    expect(await within(rowOf('A')).findByText('2027-01-15')).toBeInTheDocument();
+    expect(input).toHaveValue('2027-02-20');
+    fireEvent.blur(input);
+    pending[1]();
+    expect(await within(rowOf('A')).findByText('2027-02-20')).toBeInTheDocument();
+    expect(api.calls.update).toEqual([
+      [1, { dueDate: '2027-01-15' }],
+      [1, { dueDate: '2027-02-20' }],
+    ]);
+  });
+
   it('does not save on blur when the date did not change (AC-11)', async () => {
     const api = fakeApi([task(1, 'A', false, '2026-12-01')]);
     render(<App api={api} />);
