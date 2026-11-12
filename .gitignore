@@ -1,0 +1,10 @@
+node_modules/
+dist/
+.env
+.env.*
+*.log
+.DS_Store
+
+# private working notes (not part of the public example)
+/TASK.md
+/STATE.md
