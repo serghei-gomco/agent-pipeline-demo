@@ -1,0 +1,14 @@
+{
+  "vw": 375,
+  "withDueField": {
+    "scrollW": 458,
+    "formRight": 359,
+    "addRight": 458
+  },
+  "withoutDueField_preTaskEquivalent": {
+    "scrollW": 375,
+    "formRight": 359,
+    "addRight": 359
+  },
+  "tasksInList": 3
+}

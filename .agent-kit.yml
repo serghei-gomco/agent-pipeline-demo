@@ -1,0 +1,72 @@
+# создано agent-kit install.sh — проверь команды и оси qa.axes под свой проект
+# .agent-kit.yml — профиль проекта для agent-kit.
+# Всё, что зависит от проекта, — здесь. Агенты, скиллы и хуки kit читают только этот файл.
+# Поддерживается простой YAML: словари отступами, списки "- x" или [a, b], строки в кавычках, комментарии.
+
+project:
+  name: agent-demo-2026-11
+  language: node            # python | node | go | rust | java | ruby | php | other
+  description: "Task list demo: Node/TS Express API (in-memory) + React/TS Vite UI, Vitest tests"
+  docs: [README.md]
+
+commands:                     # пустая строка = такой команды в проекте нет
+  install: "bash scripts/node.sh npm ci"
+  test: "bash scripts/node.sh npm test --silent"
+  test_one: "bash scripts/node.sh npx vitest run {path}"
+  lint: "bash scripts/node.sh npx eslint {files}"  # {files} — изменённые файлы
+  typecheck: "bash scripts/node.sh npm run -s typecheck"
+  build: "bash scripts/node.sh npm run -s build"
+  run: "bash scripts/node.sh npm run dev"  # API :3001 + UI :5173 (прокси /api)
+  smoke_url: "http://localhost:5173"
+
+git:
+  base_branch: main
+  remote: origin
+  protected_branches: [main, master, prod, production, release]
+  branch_pattern: '^(feat|fix|chore|refactor|docs|test|task)/[A-Za-z0-9._-]+$'
+  commit_pattern: '^(feat|fix|refactor|test|docs|chore|perf|build|ci)(\([^)]+\))?: .+'
+  require_task_key: false
+  forbid_ai_trailers: true    # запрет Co-Authored-By / "Generated with" в коммитах
+  forbidden_paths: ['.env', '.env.*', '.tasks/', '*.log', '*.sqlite3', 'node_modules/', '.DS_Store']
+  max_file_mb: 1
+  worktrees: false            # демо: одно окно и нет remote — ветка задачи в основном чекауте
+  worktree_dir: '../{repo}-{key}'
+  host: none                  # github | gitlab | none — чем открывать PR/MR (gh / glab / вручную)
+
+tracker:
+  kind: none                  # none | github | gitlab | jira | linear | file
+  key_pattern: '[A-Z][A-Z0-9]+-[0-9]+'
+  write_requires_yes: true    # комментарий и смена статуса — только по «да» человека
+  file: ''                    # для kind: file — путь к файлу-трекеру (например TODO.md)
+
+tasks:
+  dir: .tasks                 # папки задач <dir>/<KEY>-<slug>/
+  state_file: STATE.md
+
+pipeline:
+  qa_plan_risk: [high]                 # при каком риске план проверки обязателен ДО кода
+  acceptance_risk: [medium, high]      # при каком риске нужна приёмка на живой сборке до пуша
+  test_plan_review_risk: [medium, high]
+  mr_self_review_risk: [high]          # когда до пуша нужен независимый разбор PR (/kit-mr-self-review)
+  auto_chain: true                     # реализация → ревью → QA-отчёт → приёмка без вопросов
+  commit_mode: per-step                # per-step | off — коммит на каждый шаг плана
+  max_review_passes: 3
+
+qa:
+  # Оси вариаций — по ним строится матрица проверки. Свои для каждого проекта.
+  axes:
+    - "пустые и граничные данные (пустой список, пустые поля, лимиты длины, несуществующие даты)"
+    - "первое создание vs обновление (POST vs PATCH, сброс поля)"
+    - "дата и часовой пояс (сегодня/вчера/завтра, локальное время vs UTC)"
+    - "состояние задачи (открыта / выполнена)"
+    - "ошибка API (4xx, сеть) — что видит пользователь"
+  main_axis: "дата и часовой пояс (сегодня/вчера/завтра, локальное время vs UTC)"
+  surface: [vitest, curl, playwright]  # чем проверять: pytest, curl, playwright, cli … (агент приёмки выбирает отсюда)
+  browsers: [chrome]          # для UI: какие движки, по признакам (см. rules/pipeline.md)
+
+danger:                       # что в проекте считается опасным — ревью смотрит первым
+  - "контракт API (поля Task общие для сервера и UI)"
+  - "валидация входа на сервере (клиенту не доверяем)"
+  - "секреты и ключи"
+
+language: ru                  # язык отчётов и общения агентов

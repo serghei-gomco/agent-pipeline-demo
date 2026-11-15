@@ -1,0 +1,45 @@
+{
+  "id": "QC-84",
+  "allActive": {
+    "all": {
+      "bg": "rgb(239, 239, 239)",
+      "color": "rgb(0, 0, 0)",
+      "border": "2px outset rgb(0, 0, 0)",
+      "fw": "400",
+      "outline": "rgb(0, 0, 0) none 3px",
+      "deco": "none",
+      "shadow": "none"
+    },
+    "overdue": {
+      "bg": "rgb(239, 239, 239)",
+      "color": "rgb(0, 0, 0)",
+      "border": "2px outset rgb(0, 0, 0)",
+      "fw": "400",
+      "outline": "rgb(0, 0, 0) none 3px",
+      "deco": "none",
+      "shadow": "none"
+    }
+  },
+  "overdueActive": {
+    "all": {
+      "bg": "rgb(239, 239, 239)",
+      "color": "rgb(0, 0, 0)",
+      "border": "2px outset rgb(0, 0, 0)",
+      "fw": "400",
+      "outline": "rgb(0, 0, 0) none 3px",
+      "deco": "none",
+      "shadow": "none"
+    },
+    "overdue": {
+      "bg": "rgb(239, 239, 239)",
+      "color": "rgb(0, 0, 0)",
+      "border": "2px outset rgb(0, 0, 0)",
+      "fw": "400",
+      "outline": "rgb(0, 0, 0) none 3px",
+      "deco": "none",
+      "shadow": "none"
+    }
+  },
+  "distinguishable": false,
+  "status": "FAIL"
+}

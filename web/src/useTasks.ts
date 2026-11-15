@@ -1,5 +1,5 @@
 import { useCallback, useEffect, useState } from 'react';
-import type { Task, TaskPatch } from '../../server/src/types';
+import type { NewTaskInput, Task, TaskPatch } from '../../server/src/types';
 import type { Api } from './api';
 
 // All task state lives in this hook. Components get data + actions and never call fetch themselves.
@@ -22,18 +22,21 @@ export function useTasks(api: Api) {
   }, [api]);
 
   // Every action clears the old error first and reports a new one if the call fails.
-  const run = useCallback(async (action: () => Promise<void>) => {
+  // Resolves to true on success, so callers can keep user input when the call failed.
+  const run = useCallback(async (action: () => Promise<void>): Promise<boolean> => {
     setError(null);
     try {
       await action();
+      return true;
     } catch (e) {
       setError((e as Error).message);
+      return false;
     }
   }, []);
 
-  const add = (title: string) =>
+  const add = (input: NewTaskInput) =>
     run(async () => {
-      const task = await api.create(title);
+      const task = await api.create(input);
       setTasks((prev) => [...prev, task]);
     });
 

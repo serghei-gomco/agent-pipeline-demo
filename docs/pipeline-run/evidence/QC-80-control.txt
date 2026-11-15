@@ -1,0 +1,5 @@
+{
+  "id": "QC-80-control",
+  "captured": true,
+  "status": "PASS"
+}

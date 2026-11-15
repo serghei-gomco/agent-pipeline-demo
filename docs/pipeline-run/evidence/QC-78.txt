@@ -1,0 +1,20 @@
+{
+  "id": "QC-78",
+  "curl": "[{\"id\":61,\"title\":\"WithDate\",\"done\":false,\"createdAt\":\"2026-11-12T14:15:44.961Z\",\"dueDate\":\"2026-11-13\"},{\"id\":62,\"title\":\"NoDate\",\"done\":false,\"createdAt\":\"2026-11-12T14:15:45.158Z\",\"dueDate\":null},{\"id\":63,\"title\":\"Edit me\",\"done\":false,\"createdAt\":\"2026-11-12T14:15:46.078Z\",\"dueDate\":null}]",
+  "ui": [
+    {
+      "title": "WithDate",
+      "due": "2026-11-13"
+    },
+    {
+      "title": "NoDate",
+      "due": null
+    },
+    {
+      "title": "Edit me",
+      "due": null
+    }
+  ],
+  "match": true,
+  "status": "PASS"
+}

@@ -1,0 +1,192 @@
+{
+  "id": "QC-69",
+  "sets": {
+    "empty": {
+      "375": {
+        "vw": 375,
+        "scrollW": 375,
+        "hScroll": false,
+        "form": {
+          "addRight": 359,
+          "dueRight": 311.28125,
+          "titleRight": 285.40625
+        },
+        "formOffscreen": false,
+        "rows": []
+      },
+      "1280": {
+        "vw": 1280,
+        "scrollW": 1280,
+        "hScroll": false,
+        "form": {
+          "addRight": 920,
+          "dueRight": 872.28125,
+          "titleRight": 612.890625
+        },
+        "formOffscreen": false,
+        "rows": []
+      }
+    },
+    "spaced": {
+      "375": {
+        "vw": 375,
+        "scrollW": 375,
+        "hScroll": false,
+        "form": {
+          "addRight": 359,
+          "dueRight": 311.28125,
+          "titleRight": 285.40625
+        },
+        "formOffscreen": false,
+        "rows": [
+          {
+            "title": "Оплатить счёт за аренду о",
+            "timeH": 18,
+            "timeText": "2026-11-13",
+            "offscreen": false,
+            "overlapTimeInput": false,
+            "timeOneLine": true,
+            "aria": "Due date for Оплатить счёт за "
+          },
+          {
+            "title": "Кириллица и эмодзи 🎉🚀 з",
+            "timeH": 18,
+            "timeText": "2026-11-13",
+            "offscreen": false,
+            "overlapTimeInput": false,
+            "timeOneLine": true,
+            "aria": "Due date for Кириллица и эмодз"
+          },
+          {
+            "title": "Short",
+            "timeH": 18,
+            "timeText": "2026-11-13",
+            "offscreen": false,
+            "overlapTimeInput": false,
+            "timeOneLine": true,
+            "aria": "Due date for Short"
+          }
+        ]
+      },
+      "1280": {
+        "vw": 1280,
+        "scrollW": 1280,
+        "hScroll": false,
+        "form": {
+          "addRight": 920,
+          "dueRight": 872.28125,
+          "titleRight": 612.890625
+        },
+        "formOffscreen": false,
+        "rows": [
+          {
+            "title": "Оплатить счёт за аренду о",
+            "timeH": 18,
+            "timeText": "2026-11-13",
+            "offscreen": false,
+            "overlapTimeInput": false,
+            "timeOneLine": true,
+            "aria": "Due date for Оплатить счёт за "
+          },
+          {
+            "title": "Кириллица и эмодзи 🎉🚀 з",
+            "timeH": 18,
+            "timeText": "2026-11-13",
+            "offscreen": false,
+            "overlapTimeInput": false,
+            "timeOneLine": true,
+            "aria": "Due date for Кириллица и эмодз"
+          },
+          {
+            "title": "Short",
+            "timeH": 18,
+            "timeText": "2026-11-13",
+            "offscreen": false,
+            "overlapTimeInput": false,
+            "timeOneLine": true,
+            "aria": "Due date for Short"
+          }
+        ]
+      }
+    },
+    "unbroken": {
+      "375": {
+        "vw": 375,
+        "scrollW": 1252,
+        "hScroll": true,
+        "form": {
+          "addRight": 359,
+          "dueRight": 311.28125,
+          "titleRight": 285.40625
+        },
+        "formOffscreen": false,
+        "rows": [
+          {
+            "title": "LLLLLLLLLLLLLLLLLLLLLLLLL",
+            "timeH": 18,
+            "timeText": "2026-11-13",
+            "offscreen": true,
+            "overlapTimeInput": false,
+            "timeOneLine": true,
+            "aria": "Due date for LLLLLLLLLLLLLLLLL"
+          },
+          {
+            "title": "Short",
+            "timeH": 18,
+            "timeText": "2026-11-13",
+            "offscreen": false,
+            "overlapTimeInput": false,
+            "timeOneLine": true,
+            "aria": "Due date for Short"
+          }
+        ]
+      },
+      "1280": {
+        "vw": 1280,
+        "scrollW": 1596,
+        "hScroll": true,
+        "form": {
+          "addRight": 920,
+          "dueRight": 872.28125,
+          "titleRight": 612.890625
+        },
+        "formOffscreen": false,
+        "rows": [
+          {
+            "title": "LLLLLLLLLLLLLLLLLLLLLLLLL",
+            "timeH": 18,
+            "timeText": "2026-11-13",
+            "offscreen": true,
+            "overlapTimeInput": false,
+            "timeOneLine": true,
+            "aria": "Due date for LLLLLLLLLLLLLLLLL"
+          },
+          {
+            "title": "Short",
+            "timeH": 18,
+            "timeText": "2026-11-13",
+            "offscreen": false,
+            "overlapTimeInput": false,
+            "timeOneLine": true,
+            "aria": "Due date for Short"
+          }
+        ]
+      }
+    }
+  },
+  "verdictBySet": {
+    "empty": {
+      "375": true,
+      "1280": true
+    },
+    "spaced": {
+      "375": true,
+      "1280": true
+    },
+    "unbroken": {
+      "375": false,
+      "1280": false
+    }
+  },
+  "status": "FAIL"
+}

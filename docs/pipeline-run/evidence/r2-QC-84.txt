@@ -1,0 +1,58 @@
+{
+  "id": "QC-84",
+  "allActive": {
+    "all": {
+      "pressed": "true",
+      "bg": "rgb(29, 29, 31)",
+      "color": "rgb(255, 255, 255)",
+      "border": "2px solid rgb(29, 29, 31)",
+      "fw": "600"
+    },
+    "overdue": {
+      "pressed": "false",
+      "bg": "rgb(239, 239, 239)",
+      "color": "rgb(0, 0, 0)",
+      "border": "2px outset rgb(0, 0, 0)",
+      "fw": "400"
+    }
+  },
+  "overdueActive": {
+    "all": {
+      "pressed": "false",
+      "bg": "rgb(239, 239, 239)",
+      "color": "rgb(0, 0, 0)",
+      "border": "2px outset rgb(0, 0, 0)",
+      "fw": "400"
+    },
+    "overdue": {
+      "pressed": "true",
+      "bg": "rgb(29, 29, 31)",
+      "color": "rgb(255, 255, 255)",
+      "border": "2px solid rgb(29, 29, 31)",
+      "fw": "600"
+    }
+  },
+  "backToAll": {
+    "all": {
+      "pressed": "true",
+      "bg": "rgb(29, 29, 31)",
+      "color": "rgb(255, 255, 255)",
+      "border": "2px solid rgb(29, 29, 31)",
+      "fw": "600"
+    },
+    "overdue": {
+      "pressed": "false",
+      "bg": "rgb(239, 239, 239)",
+      "color": "rgb(0, 0, 0)",
+      "border": "2px outset rgb(0, 0, 0)",
+      "fw": "400"
+    }
+  },
+  "checks": {
+    "allMode_activeDiffersFromInactive": true,
+    "overdueMode_activeDiffersFromInactive": true,
+    "activeLookFollowsMode": true,
+    "backToAllRestores": true
+  },
+  "status": "PASS"
+}

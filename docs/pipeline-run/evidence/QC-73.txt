@@ -1,0 +1,21 @@
+{
+  "id": "QC-73",
+  "before": {
+    "title": "rgb(198, 40, 40)",
+    "time": "rgb(198, 40, 40)"
+  },
+  "done": {
+    "title": "rgb(142, 142, 147)",
+    "deco": "line-through",
+    "time": "rgb(29, 29, 31)",
+    "cls": null
+  },
+  "doneInOverdue": 0,
+  "emptyMsg": 1,
+  "after": {
+    "title": "rgb(198, 40, 40)",
+    "time": "rgb(198, 40, 40)"
+  },
+  "reopenedInOverdue": 1,
+  "status": "PASS"
+}

@@ -1,0 +1,28 @@
+{
+  "id": "QC-37",
+  "afterFirstF5": {
+    "time": "2027-01-15",
+    "input": "2027-01-15"
+  },
+  "afterSecondF5": {
+    "timeCount": 0,
+    "input": ""
+  },
+  "patches": [
+    {
+      "m": "PATCH",
+      "url": "/api/tasks/17",
+      "body": "{\"dueDate\":\"2027-01-15\"}"
+    },
+    {
+      "m": "PATCH",
+      "url": "/api/tasks/17",
+      "body": "{\"dueDate\":null}"
+    }
+  ],
+  "resp": [
+    200,
+    200
+  ],
+  "status": "PASS"
+}

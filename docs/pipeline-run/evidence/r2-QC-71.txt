@@ -1,0 +1,20 @@
+{
+  "id": "QC-71",
+  "browser": {
+    "now": "Thu Nov 12 2026 00:30:00 GMT+0200 (Eastern European Standard Time)",
+    "iso": "2026-11-11T22:30:00.000Z",
+    "tz": "Europe/Chisinau"
+  },
+  "red": {
+    "title": "rgb(198, 40, 40)",
+    "time": "rgb(198, 40, 40)"
+  },
+  "not": {
+    "title": "rgb(29, 29, 31)",
+    "time": "rgb(29, 29, 31)"
+  },
+  "overdueMode": [
+    "RedOne"
+  ],
+  "status": "PASS"
+}

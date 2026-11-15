@@ -1,0 +1,30 @@
+import { createRequire } from 'module'; import { writeFileSync, openSync } from 'fs'; import { execSync, spawn } from 'child_process';
+const require = createRequire(import.meta.url);
+const { chromium } = require('~/.npm/_npx/9833c18b2d85bc59/node_modules/playwright');
+const EV = './.tasks/T-20261112-1-due-dates-overdue/evidence';
+const API = 'http://localhost:3001', BASE = 'http://localhost:5173';
+const o = { id: 'QC-77' }; const sleep = (ms) => new Promise((r) => setTimeout(r, ms));
+const up = async () => { try { return (await fetch(API + '/api/tasks')).status === 200; } catch { return false; } };
+const b = await chromium.launch({ channel: 'chrome' });
+try {
+  const created = await (await fetch(API + '/api/tasks', { method: 'POST', headers: { 'content-type': 'application/json' }, body: JSON.stringify({ title: 'Persist', dueDate: '2026-12-01' }) })).json();
+  const ctx = await b.newContext(); const A = await ctx.newPage(); const B = await ctx.newPage(); const cons = [];
+  for (const p of [A, B]) p.on('pageerror', (e) => cons.push(String(e)));
+  await A.goto(BASE); await A.waitForLoadState('networkidle'); await B.goto(BASE); await B.waitForLoadState('networkidle');
+  o.beforeRestart = await A.locator('li').count();
+  o.killed = execSync(`kill ${process.argv[2]} && echo killed ${process.argv[2]}`).toString().trim();
+  for (let i = 0; i < 20 && (await up()); i++) await sleep(500); o.apiDown = !(await up());
+  const log = openSync(`${EV}/api-restart.log`, 'a');
+  const child = spawn('bash', ['scripts/node.sh', 'npm', 'run', 'dev:api'], { cwd: '.', detached: true, stdio: ['ignore', log, log] });
+  child.unref(); writeFileSync(`${EV}/api-restart.pid`, String(child.pid)); o.newApiPid = child.pid;
+  for (let i = 0; i < 30 && !(await up()); i++) await sleep(1000); o.apiUpAgain = await up();
+  await A.reload(); await A.waitForLoadState('networkidle'); await A.waitForTimeout(300);
+  o.afterF5 = { noTasks: await A.locator('text=No tasks yet.').count(), rows: await A.locator('li').count() };
+  await B.bringToFront(); await B.getByLabel('Due date for Persist').fill('2027-03-03'); await B.locator('h1').click(); await B.waitForTimeout(800);
+  o.tabB = { alert: await B.locator('[role=alert]').textContent().catch(() => null), time: await B.locator('li', { has: B.locator('.title', { hasText: /^Persist$/ }) }).locator('time').textContent().catch(() => null), h1: await B.textContent('h1') };
+  o.pageErrors = cons; o.taskIdBefore = created.id;
+  await B.screenshot({ path: `${EV}/QC-77.png` });
+  o.status = o.apiDown && o.apiUpAgain && o.afterF5.noTasks === 1 && o.tabB.alert === 'task not found' && o.tabB.time === '2026-12-01' && cons.length === 0 ? 'PASS' : 'FAIL';
+} catch (e) { o.status = 'ERROR'; o.error = String(e.stack || e); }
+await b.close();
+writeFileSync(`${EV}/QC-77.txt`, JSON.stringify(o, null, 2)); console.log(JSON.stringify(o));

@@ -1,0 +1,15 @@
+{
+  "id": "QC-26",
+  "yest": {
+    "title": "rgb(198, 40, 40)",
+    "time": "rgb(198, 40, 40)",
+    "cls": "overdue"
+  },
+  "tomo": {
+    "title": "rgb(29, 29, 31)",
+    "time": "rgb(29, 29, 31)",
+    "cls": null
+  },
+  "browserNow": "Thu Nov 12 2026 16:15:49 GMT+0200 (Eastern European Standard Time)",
+  "status": "PASS"
+}

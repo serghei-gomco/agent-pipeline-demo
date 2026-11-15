@@ -1,0 +1,5 @@
+{
+  "engine": "firefox",
+  "status": "ERROR",
+  "error": "browserType.launch: Timeout 180000ms exceeded.\nCall log:\n  \u001b[2m- <launching> ~/Library/Caches/ms-playwright/firefox-1440/firefox/Nightly.app/Contents/MacOS/firefox -no-remote -headless -profile /var/folders/0k/87hfks7j7j7byjr34dy0lmv40000gn/T/playwright_firefoxdev_profile-t0xxe2 -juggler-pipe -silent\u001b[22m\n\u001b[2m  - <launched> pid=13729\u001b[22m\n\u001b[2m  - [pid=13729][err] *** You are running in headless mode.\u001b[22m\n\u001b[2m  - [pid=13729][err] sandbox_extension_issue_file_to_process failed for ~/Library/Caches/ms-playwright/firefox-1440/firefox/Nightly.app/Contents/MacOS/plugin-container.app: 1 (Operation not permitted)\u001b[22m\n\u001b[2m  - [pid=13729][err] JavaScript error: resource://gre/modules/XULStore.sys.mjs, line 84: Error: Can't find profile directory.\u001b[22m\n\u001b[2m  - [pid=13729][er"
+}

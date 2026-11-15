@@ -1,0 +1,114 @@
+{
+  "id": "QC-69",
+  "titles": {
+    "spacedLen": 120,
+    "unbrokenLen": 120
+  },
+  "widths": {
+    "375": {
+      "vw": 375,
+      "scrollW": 1306,
+      "hScroll": true,
+      "rows": [
+        {
+          "aria": "Due date for Оплатить счёт за ",
+          "timeRight": 195.296875,
+          "inpLeft": 209.875,
+          "inpRight": 335.203125,
+          "btnRight": 359,
+          "labelRight": 209.875,
+          "overlapTimeInput": false,
+          "offscreen": false,
+          "timeSameLineAsTitle": false
+        },
+        {
+          "aria": "Due date for LLLLLLLLLLLLLLLLL",
+          "timeRight": 1156.4375,
+          "inpLeft": 1156.4375,
+          "inpRight": 1281.765625,
+          "btnRight": 1305.5625,
+          "labelRight": 1156.4375,
+          "overlapTimeInput": false,
+          "offscreen": true,
+          "timeSameLineAsTitle": true
+        },
+        {
+          "aria": "Due date for Кириллица и эмодз",
+          "timeRight": 204.453125,
+          "inpLeft": 209.875,
+          "inpRight": 335.203125,
+          "btnRight": 359,
+          "labelRight": 209.875,
+          "overlapTimeInput": false,
+          "offscreen": false,
+          "timeSameLineAsTitle": false
+        },
+        {
+          "aria": "Due date for Short",
+          "timeRight": 167.40625,
+          "inpLeft": 188.640625,
+          "inpRight": 313.96875,
+          "btnRight": 359,
+          "labelRight": 167.40625,
+          "overlapTimeInput": false,
+          "offscreen": false,
+          "timeSameLineAsTitle": true
+        }
+      ],
+      "scrollWWithoutNewElements": 1127
+    },
+    "1280": {
+      "vw": 1280,
+      "scrollW": 1650,
+      "hScroll": true,
+      "rows": [
+        {
+          "aria": "Due date for Оплатить счёт за ",
+          "timeRight": 694.890625,
+          "inpLeft": 770.875,
+          "inpRight": 896.203125,
+          "btnRight": 920,
+          "labelRight": 770.875,
+          "overlapTimeInput": false,
+          "offscreen": false,
+          "timeSameLineAsTitle": false
+        },
+        {
+          "aria": "Due date for LLLLLLLLLLLLLLLLL",
+          "timeRight": 1500.4375,
+          "inpLeft": 1500.4375,
+          "inpRight": 1625.765625,
+          "btnRight": 1649.5625,
+          "labelRight": 1500.4375,
+          "overlapTimeInput": false,
+          "offscreen": true,
+          "timeSameLineAsTitle": true
+        },
+        {
+          "aria": "Due date for Кириллица и эмодз",
+          "timeRight": 731.046875,
+          "inpLeft": 750.96875,
+          "inpRight": 876.296875,
+          "btnRight": 920,
+          "labelRight": 731.046875,
+          "overlapTimeInput": false,
+          "offscreen": false,
+          "timeSameLineAsTitle": true
+        },
+        {
+          "aria": "Due date for Short",
+          "timeRight": 511.40625,
+          "inpLeft": 641.140625,
+          "inpRight": 766.46875,
+          "btnRight": 920,
+          "labelRight": 511.40625,
+          "overlapTimeInput": false,
+          "offscreen": false,
+          "timeSameLineAsTitle": true
+        }
+      ],
+      "scrollWWithoutNewElements": 1471
+    }
+  },
+  "status": "FAIL"
+}

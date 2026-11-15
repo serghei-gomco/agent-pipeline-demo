@@ -1,0 +1,28 @@
+{
+  "id": "QC-46",
+  "fieldValue": "20261-01-01",
+  "post": [
+    {
+      "m": "POST",
+      "url": "/api/tasks",
+      "body": "{\"title\":\"A\",\"dueDate\":\"20261-01-01\"}"
+    },
+    {
+      "resp": 400,
+      "m": "POST",
+      "url": "/api/tasks"
+    }
+  ],
+  "alert": "dueDate must be a date in YYYY-MM-DD format",
+  "rowA": 0,
+  "h": [
+    "Tasks (1 open)",
+    "Tasks (1 open)"
+  ],
+  "fieldsAfter": {
+    "title": "A",
+    "due": "20261-01-01"
+  },
+  "controlRowA": 1,
+  "status": "PASS"
+}

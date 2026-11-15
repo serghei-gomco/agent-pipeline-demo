@@ -1,0 +1,47 @@
+{
+  "id": "QC-49",
+  "alert": "Failed to fetch",
+  "overdueText": [
+    "Нет просроченных задач"
+  ],
+  "allText": [
+    "No tasks yet."
+  ],
+  "consoleErrors": [
+    {
+      "tag": "QC-49",
+      "type": "error",
+      "text": "Failed to load resource: net::ERR_FAILED",
+      "url": "http://localhost:5173/api/tasks"
+    },
+    {
+      "tag": "QC-49",
+      "type": "error",
+      "text": "Failed to load resource: net::ERR_FAILED",
+      "url": "http://localhost:5173/api/tasks"
+    }
+  ],
+  "net": [
+    {
+      "m": "GET",
+      "url": "/api/tasks",
+      "body": null
+    },
+    {
+      "m": "GET",
+      "url": "/api/tasks",
+      "body": null
+    },
+    {
+      "failed": "net::ERR_FAILED",
+      "m": "GET",
+      "url": "/api/tasks"
+    },
+    {
+      "failed": "net::ERR_FAILED",
+      "m": "GET",
+      "url": "/api/tasks"
+    }
+  ],
+  "status": "PASS"
+}

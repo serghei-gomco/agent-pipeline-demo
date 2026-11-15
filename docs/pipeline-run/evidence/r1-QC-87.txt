@@ -1,0 +1,137 @@
+{
+  "id": "QC-87",
+  "h0": "Tasks (1 open)",
+  "a": {
+    "field": {
+      "value": "",
+      "badInput": true
+    },
+    "posts": 0,
+    "alerts": [],
+    "rowHalf": 0,
+    "h1": "Tasks (1 open)",
+    "fieldsAfter": {
+      "title": "Half",
+      "due": {
+        "value": "",
+        "badInput": true
+      }
+    }
+  },
+  "b": {
+    "posts": 0,
+    "alerts": [],
+    "title": "Half"
+  },
+  "c": {
+    "fieldBefore": {
+      "value": "",
+      "badInput": false
+    },
+    "postBodies": [
+      "{\"title\":\"Half\",\"dueDate\":null}"
+    ],
+    "resp": [
+      201
+    ],
+    "rowHalf": 1,
+    "timeInRow": 0,
+    "alerts": [],
+    "fieldsAfter": {
+      "title": "",
+      "due": {
+        "value": "",
+        "badInput": false
+      }
+    }
+  },
+  "d": {
+    "fieldBefore": {
+      "value": "",
+      "badInput": false
+    },
+    "postBody": "{\"title\":\"NoDue\",\"dueDate\":null}",
+    "timeInRow": 0
+  },
+  "e": {
+    "alertAfterHalf": [],
+    "field": {
+      "value": "0007-02-20",
+      "badInput": false
+    },
+    "postBody": "{\"title\":\"Full\",\"dueDate\":\"0007-02-20\"}",
+    "time": "0007-02-20",
+    "alertsAfter": []
+  },
+  "api": [
+    {
+      "title": "Existing",
+      "dueDate": null
+    },
+    {
+      "title": "Half",
+      "dueDate": null
+    },
+    {
+      "title": "NoDue",
+      "dueDate": null
+    },
+    {
+      "title": "Full",
+      "dueDate": "0007-02-20"
+    }
+  ],
+  "status": "FAIL",
+  "net": [
+    {
+      "m": "GET",
+      "url": "/api/tasks",
+      "body": null
+    },
+    {
+      "m": "GET",
+      "url": "/api/tasks",
+      "body": null
+    },
+    {
+      "resp": 200,
+      "m": "GET",
+      "url": "/api/tasks"
+    },
+    {
+      "resp": 200,
+      "m": "GET",
+      "url": "/api/tasks"
+    },
+    {
+      "m": "POST",
+      "url": "/api/tasks",
+      "body": "{\"title\":\"Half\",\"dueDate\":null}"
+    },
+    {
+      "resp": 201,
+      "m": "POST",
+      "url": "/api/tasks"
+    },
+    {
+      "m": "POST",
+      "url": "/api/tasks",
+      "body": "{\"title\":\"NoDue\",\"dueDate\":null}"
+    },
+    {
+      "resp": 201,
+      "m": "POST",
+      "url": "/api/tasks"
+    },
+    {
+      "m": "POST",
+      "url": "/api/tasks",
+      "body": "{\"title\":\"Full\",\"dueDate\":\"0007-02-20\"}"
+    },
+    {
+      "resp": 201,
+      "m": "POST",
+      "url": "/api/tasks"
+    }
+  ]
+}

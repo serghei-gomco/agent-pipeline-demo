@@ -1,0 +1,20 @@
+{
+  "id": "QC-77",
+  "beforeRestart": 1,
+  "killed": "killed 19084",
+  "apiDown": true,
+  "newApiPid": 19542,
+  "apiUpAgain": true,
+  "afterF5": {
+    "noTasks": 1,
+    "rows": 0
+  },
+  "tabB": {
+    "alert": "task not found",
+    "time": "2026-12-01",
+    "h1": "Tasks (1 open)"
+  },
+  "pageErrors": [],
+  "taskIdBefore": 1,
+  "status": "PASS"
+}

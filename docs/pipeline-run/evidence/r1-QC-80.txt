@@ -1,0 +1,14 @@
+{
+  "id": "QC-80",
+  "errorsAndWarnings": [
+    {
+      "tag": "control",
+      "type": "error",
+      "text": "Failed to load resource: the server responded with a status of 404 (Not Found)",
+      "url": "http://localhost:5173/favicon.ico"
+    }
+  ],
+  "unexpected": [],
+  "total": 56,
+  "status": "PASS"
+}

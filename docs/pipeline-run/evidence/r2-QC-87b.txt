@@ -1,0 +1,74 @@
+{
+  "en-US": {
+    "locale": "en-US",
+    "before": {
+      "badInput": true,
+      "formValid": false,
+      "novalidate": false
+    },
+    "afterClick": {
+      "events": [
+        "invalid:Введите верное значение. Поле не заполнено или введена недействительная дата."
+      ],
+      "active": "new-due",
+      "alerts": []
+    },
+    "postsAfterHalf": 0,
+    "completed": {
+      "value": "2027-01-01",
+      "badInput": false
+    },
+    "afterValid": {
+      "events": [
+        "submit"
+      ],
+      "alerts": []
+    },
+    "posts": [
+      "{\"title\":\"Half\",\"dueDate\":\"2027-01-01\"}"
+    ],
+    "timeInRow": "2027-01-01"
+  },
+  "ru-RU": {
+    "locale": "ru-RU",
+    "before": {
+      "badInput": true,
+      "formValid": false,
+      "novalidate": false
+    },
+    "afterClick": {
+      "events": [
+        "invalid:Введите верное значение. Поле не заполнено или введена недействительная дата."
+      ],
+      "active": "new-due",
+      "alerts": []
+    },
+    "postsAfterHalf": 0,
+    "completed": {
+      "value": "2027-01-01",
+      "badInput": false
+    },
+    "afterValid": {
+      "events": [
+        "submit"
+      ],
+      "alerts": []
+    },
+    "posts": [
+      "{\"title\":\"Half\",\"dueDate\":\"2027-01-01\"}"
+    ],
+    "timeInRow": "2027-01-01"
+  },
+  "qc69unbroken": {
+    "375": {
+      "vw": 375,
+      "scrollW": 1252,
+      "scrollWWithoutTaskElements": 1127
+    },
+    "1280": {
+      "vw": 1280,
+      "scrollW": 1596,
+      "scrollWWithoutTaskElements": 1471
+    }
+  }
+}

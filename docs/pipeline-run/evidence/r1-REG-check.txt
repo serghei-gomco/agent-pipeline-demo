@@ -1,0 +1,29 @@
+
+ RUN  v2.1.4 .
+
+ ✓ |server| server/test/tasks.test.ts  (37 tests) 69ms
+ ✓ |web| web/src/overdue.test.ts  (15 tests) 2ms
+ ✓ |web| web/src/api.test.ts  (4 tests) 4ms
+ ✓ |web| web/src/styles.test.tsx  (2 tests) 81ms
+ ✓ |web| web/src/App.test.tsx  (23 tests) 511ms
+
+ Test Files  5 passed (5)
+      Tests  81 passed (81)
+   Start at  16:45:11
+   Duration  1.20s (transform 105ms, setup 478ms, collect 302ms, tests 667ms, environment 1.30s, prepare 199ms)
+
+
+ RUN  v2.1.4 .
+
+ ✓ |server| server/test/tasks.test.ts  (37 tests) 74ms
+ ✓ |web| web/src/overdue.test.ts  (15 tests) 2ms
+ ✓ |web| web/src/api.test.ts  (4 tests) 4ms
+ ✓ |web| web/src/styles.test.tsx  (2 tests) 79ms
+ ✓ |web| web/src/App.test.tsx  (23 tests) 510ms
+
+ Test Files  5 passed (5)
+      Tests  81 passed (81)
+   Start at  09:45:12
+   Duration  1.03s (transform 83ms, setup 328ms, collect 224ms, tests 669ms, environment 882ms, prepare 165ms)
+
+exit code: 0

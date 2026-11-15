@@ -1,0 +1,44 @@
+[
+  {
+    "tag": "QC-69",
+    "type": "debug",
+    "text": "[vite] connecting...",
+    "url": "http://localhost:5173/@vite/client"
+  },
+  {
+    "tag": "QC-69",
+    "type": "debug",
+    "text": "[vite] connected.",
+    "url": "http://localhost:5173/@vite/client"
+  },
+  {
+    "tag": "QC-69",
+    "type": "info",
+    "text": "%cDownload the React DevTools for a better development experience: https://reactjs.org/link/react-devtools font-weight:bold",
+    "url": "http://localhost:5173/@fs./node_modules/.vite/deps/chunk-373CG7ZK.js?v=8dbd3e4d"
+  },
+  {
+    "tag": "QC-69",
+    "type": "error",
+    "text": "Failed to load resource: the server responded with a status of 404 (Not Found)",
+    "url": "http://localhost:5173/favicon.ico"
+  },
+  {
+    "tag": "QC-69",
+    "type": "debug",
+    "text": "[vite] connecting...",
+    "url": "http://localhost:5173/@vite/client"
+  },
+  {
+    "tag": "QC-69",
+    "type": "debug",
+    "text": "[vite] connected.",
+    "url": "http://localhost:5173/@vite/client"
+  },
+  {
+    "tag": "QC-69",
+    "type": "info",
+    "text": "%cDownload the React DevTools for a better development experience: https://reactjs.org/link/react-devtools font-weight:bold",
+    "url": "http://localhost:5173/@fs./node_modules/.vite/deps/chunk-373CG7ZK.js?v=8dbd3e4d"
+  }
+]

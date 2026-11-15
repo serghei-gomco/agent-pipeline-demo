@@ -1,0 +1,72 @@
+# .agent-kit.yml — профиль проекта для agent-kit.
+# Всё, что зависит от проекта, — здесь. Агенты, скиллы и хуки kit читают только этот файл.
+# Поддерживается простой YAML: словари отступами, списки "- x" или [a, b], строки в кавычках, комментарии.
+
+project:
+  name: my-project
+  language: python            # python | node | go | rust | java | ruby | php | other
+  description: ""             # одна фраза: что это за проект (агенты читают на шаге 0)
+  docs: []                    # файлы, которые агенты обязаны прочитать перед планом (конвенции, архитектура)
+
+commands:                     # пустая строка = такой команды в проекте нет
+  install: ""
+  test: "pytest -q"
+  test_one: "pytest -q {path}"
+  lint: "ruff check {files}"  # {files} — изменённые файлы
+  typecheck: ""
+  build: ""
+  run: ""                     # как поднять приложение локально для приёмки
+  smoke_url: ""               # адрес локального приложения для приёмки (если есть UI/API)
+
+git:
+  base_branch: main
+  remote: origin
+  protected_branches: [main, master, prod, production, release]
+  branch_pattern: '^(feat|fix|chore|refactor|docs|test|task)/[A-Za-z0-9._-]+$'
+  commit_pattern: '^(feat|fix|refactor|test|docs|chore|perf|build|ci)(\([^)]+\))?: .+'
+  require_task_key: false     # true — в сообщении коммита обязателен ключ задачи (tracker.key_pattern)
+  forbid_ai_trailers: true    # запрет Co-Authored-By / "Generated with" в коммитах
+  forbidden_paths: ['.env', '.env.*', '.tasks/', '*.log', '*.sqlite3', 'node_modules/', '.DS_Store']
+  max_file_mb: 1
+  worktrees: true             # код задачи — в отдельном git worktree от base_branch, без upstream на базу
+  worktree_dir: '../{repo}-{key}'
+  host: none                  # github | gitlab | none — чем открывать PR/MR (gh / glab / вручную)
+
+tracker:
+  kind: none                  # none | github | gitlab | jira | linear | file
+  key_pattern: '[A-Z][A-Z0-9]+-[0-9]+'
+  write_requires_yes: true    # комментарий и смена статуса — только по «да» человека
+  file: ''                    # для kind: file — путь к файлу-трекеру (например TODO.md)
+
+tasks:
+  dir: .tasks                 # папки задач <dir>/<KEY>-<slug>/
+  state_file: STATE.md
+
+pipeline:
+  qa_plan_risk: [high]                 # при каком риске план проверки обязателен ДО кода
+  acceptance_risk: [medium, high]      # при каком риске нужна приёмка на живой сборке до пуша
+  test_plan_review_risk: [medium, high]
+  mr_self_review_risk: [high]          # когда до пуша нужен независимый разбор PR (/kit-mr-self-review)
+  auto_chain: true                     # реализация → ревью → QA-отчёт → приёмка без вопросов
+  commit_mode: per-step                # per-step | off — коммит на каждый шаг плана
+  max_review_passes: 3
+
+qa:
+  # Оси вариаций — по ним строится матрица проверки. Свои для каждого проекта.
+  axes:
+    - "роль / права пользователя"
+    - "пустые и граничные данные"
+    - "первое создание vs обновление"
+    - "ошибка внешней зависимости"
+    - "конфигурация / окружение"
+  main_axis: "роль / права пользователя"
+  surface: []                 # чем проверять: pytest, curl, playwright, cli … (агент приёмки выбирает отсюда)
+  browsers: [chrome]          # для UI: какие движки, по признакам (см. rules/pipeline.md)
+
+danger:                       # что в проекте считается опасным — ревью смотрит первым
+  - "изоляция данных между пользователями"
+  - "деньги и платежи"
+  - "миграции данных"
+  - "секреты и ключи"
+
+language: ru                  # язык отчётов и общения агентов

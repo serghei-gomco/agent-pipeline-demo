@@ -1,0 +1,13 @@
+
+ RUN  v2.1.4 .
+
+ ✓ |server| server/test/tasks.test.ts  (37 tests) 67ms
+ ✓ |web| web/src/overdue.test.ts  (9 tests) 2ms
+ ✓ |web| web/src/App.test.tsx  (18 tests) 415ms
+
+ Test Files  3 passed (3)
+      Tests  64 passed (64)
+   Start at  16:20:13
+   Duration  1.05s (transform 57ms, setup 232ms, collect 185ms, tests 484ms, environment 551ms, prepare 119ms)
+
+exit=0

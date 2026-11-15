@@ -1,0 +1,29 @@
+{
+  "id": "QC-83",
+  "afterBackspace": {
+    "value": "",
+    "badInput": true
+  },
+  "patchesAfterHalfTyped": [],
+  "timeAfterBlur": "2026-12-01",
+  "apiAfterBlur": "2026-12-01",
+  "rowAlerts": [],
+  "afterF5": {
+    "time": "2026-12-01",
+    "field": {
+      "value": "2026-12-01",
+      "badInput": false
+    }
+  },
+  "afterFullClear": {
+    "value": "",
+    "badInput": false
+  },
+  "patchesTotal": [
+    "{\"dueDate\":null}"
+  ],
+  "timeAfterFullClear": 0,
+  "apiAfterFullClear": null,
+  "positiveControl": true,
+  "status": "PASS"
+}

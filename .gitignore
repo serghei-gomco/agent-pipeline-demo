@@ -8,3 +8,12 @@ dist/
 # private working notes (not part of the public example)
 /TASK.md
 /STATE.md
+
+# agent-kit: папки задач — артефакты, не код
+/.tasks/
+/.agent-kit/
+/INTERVIEW_NOTES.md
+/VIDEO_SCRIPT.md
+
+# TestDriver artifacts
+.testdriver/
