@@ -14,3 +14,6 @@ dist/
 /.agent-kit/
 /INTERVIEW_NOTES.md
 /VIDEO_SCRIPT.md
+
+# TestDriver artifacts
+.testdriver/
